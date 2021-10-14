@@ -11,10 +11,12 @@ namespace DFQXYU_HFT_2021221.Models
     {
         [Key]
         public string MovieID { get; set; }
+        [Required]
         public string MovieTitle { get; set; }
         public int Year { get; set; }
         public string Producer { get; set; }
         public string Location { get; set; }
+        [Required]
         public int Price { get; set; }
 
 

@@ -13,9 +13,15 @@ namespace DFQXYU_HFT_2021221.Models
     {
         [Key]
         public int CostumerID { get; set; }
+        [Required]
         public string Name { get; set; }
+        [Required]
         public DateTime BornDate { get; set; }
+        [Required]
         public string Email { get; set; }
-        public int PhoneNumber { get; set; }       
+        [Required]
+        [MaxLength(9)]
+        [MinLength(9)]
+        public int PhoneNumber { get; set; }
     }
 }
