@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace DFQXYU_HFT_2021221.Models
 {
     [Table("Costumers")]
-    class Costumer
+    public class Costumer
     {
         [Key]
         public int CostumerID { get; set; }
@@ -23,5 +23,9 @@ namespace DFQXYU_HFT_2021221.Models
         [MaxLength(9)]
         [MinLength(9)]
         public int PhoneNumber { get; set; }
+        public Costumer()
+        {
+
+        }
     }
 }

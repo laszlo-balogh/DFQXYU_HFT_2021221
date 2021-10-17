@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace DFQXYU_HFT_2021221.Models
 {
     [Table("Rentals")]
-    class MovieRental
+    public class MovieRental
     {
         [Key]
         public int RentalID { get; set; }
@@ -25,7 +25,7 @@ namespace DFQXYU_HFT_2021221.Models
         [ForeignKey(nameof(Costumer))]
         public int CostumerID { get; set; }
 
-
+        
 
     }
 }
