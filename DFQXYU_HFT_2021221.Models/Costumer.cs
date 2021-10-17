@@ -23,9 +23,12 @@ namespace DFQXYU_HFT_2021221.Models
         [MaxLength(9)]
         [MinLength(9)]
         public int PhoneNumber { get; set; }
+        public virtual ICollection<MovieRental> Rentals { get; set; }
+
         public Costumer()
         {
-
+            this.Rentals = new HashSet<MovieRental>();
         }
+
     }
 }

@@ -24,6 +24,11 @@ namespace DFQXYU_HFT_2021221.Models
         public Costumer Costumer { get; set; }
         [ForeignKey(nameof(Costumer))]
         public int CostumerID { get; set; }
+        public MovieRental()
+        {
+            this.StartDate = DateTime.Now;
+            this.EndDate = this.StartDate.AddDays(30);
+        }
 
         
 

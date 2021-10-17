@@ -25,11 +25,7 @@ namespace DFQXYU_HFT_2021221.Models
 
         public Movie()
         {
-            Rentals = new HashSet<MovieRental>();
-
+            this.Rentals = new HashSet<MovieRental>();
         }
-
-
-
     }
 }

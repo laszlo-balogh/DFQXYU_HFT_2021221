@@ -8,6 +8,7 @@ namespace DFQXYU_HFT_2021221.Client
         {
             Console.WriteLine("Hello World!");
             //Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\DFQXYU_HFT_2021221_Database.mdf;Integrated Security=True
+
         }
     }
 }
