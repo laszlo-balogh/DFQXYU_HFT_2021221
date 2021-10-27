@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DFQXYU_HFT_2021221.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,5 +9,10 @@ namespace DFQXYU_HFT_2021221.Repository
 {
     interface ICustomerRepository
     {
+        void Create(Customer customer);
+        void Delete(int id);
+        Customer Read(int id);
+        IQueryable<Customer> ReadAll();
+        void Update(Customer customer);
     }
 }
