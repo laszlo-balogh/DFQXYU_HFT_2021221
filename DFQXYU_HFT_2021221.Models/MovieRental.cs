@@ -17,20 +17,17 @@ namespace DFQXYU_HFT_2021221.Models
         public DateTime EndDate { get; set; }
         public bool Promotions { get; set; }
         [NotMapped]
-        public Movie Movie { get; set; }
+        public virtual Movie Movie { get; set; }
         [ForeignKey(nameof(Movie))]
         public int MovieID { get; set; }
         [NotMapped]
-        public Costumer Costumer { get; set; }
-        [ForeignKey(nameof(Costumer))]
-        public int CostumerID { get; set; }
+        public virtual Customer Customer { get; set; }
+        [ForeignKey(nameof(Customer))]
+        public int CustumerID { get; set; }
         public MovieRental()
         {
             this.StartDate = DateTime.Now;
             this.EndDate = this.StartDate.AddDays(30);
         }
-
-        
-
     }
 }

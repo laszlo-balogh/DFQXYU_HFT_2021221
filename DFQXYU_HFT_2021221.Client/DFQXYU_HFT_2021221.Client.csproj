@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
@@ -6,6 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\DFQXYU_HFT_2021221.Data\DFQXYU_HFT_2021221.Data.csproj" />
     <ProjectReference Include="..\DFQXYU_HFT_2021221.Models\DFQXYU_HFT_2021221.Models.csproj" />
   </ItemGroup>
 

@@ -8,11 +8,11 @@ using System.Threading.Tasks;
 
 namespace DFQXYU_HFT_2021221.Models
 {
-    [Table("Costumers")]
-    public class Costumer
+    [Table("Customers")]
+    public class Customer
     {
         [Key]
-        public int CostumerID { get; set; }
+        public int CustomerID { get; set; }
         [Required]
         public string Name { get; set; }
         [Required]
@@ -25,7 +25,7 @@ namespace DFQXYU_HFT_2021221.Models
         public int PhoneNumber { get; set; }
         public virtual ICollection<MovieRental> Rentals { get; set; }
 
-        public Costumer()
+        public Customer()
         {
             this.Rentals = new HashSet<MovieRental>();
         }
