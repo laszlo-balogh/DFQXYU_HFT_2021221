@@ -8,18 +8,18 @@ using System.Threading.Tasks;
 
 namespace DFQXYU_HFT_2021221.Repository
 {
-    class MovieRepository : IMovieRentalRepository
+    class MovieRepository : IMovieRepository
     {
-
         MovieDbContext db;
 
         public MovieRepository(MovieDbContext db)
         {
             this.db = db;
         }
-        public void Create(MovieRental rental)
+
+        public void Create(Movie movie)
         {
-            db.Add(rental);
+            db.Add(movie);
             db.SaveChanges();
         }
 
@@ -29,27 +29,26 @@ namespace DFQXYU_HFT_2021221.Repository
             db.SaveChanges();
         }
 
-        public MovieRental Read(int id)
+        public Movie Read(int id)
         {
-            return db.MovieRentals.FirstOrDefault(t => t.RentalID == id);
+            return db.Movies.FirstOrDefault(t => t.MovieID==id);
         }
 
-        public IQueryable<MovieRental> ReadAll()
+        public IQueryable<Movie> ReadAll()
         {
-            return db.MovieRentals;
+            return db.Movies;
         }
 
-        public void Update(MovieRental rental)
+        public void Update(Movie movie)
         {
-            var oldRental = Read(rental.RentalID);
-            oldRental.Movie = rental.Movie;
-            oldRental.MovieID = rental.MovieID;
-            oldRental.Promotions = rental.Promotions;
-            oldRental.RentalID = rental.RentalID;
-            oldRental.StartDate = rental.StartDate;
-            oldRental.EndDate = rental.EndDate;
-            oldRental.CustumerID = rental.CustumerID;
-            oldRental.Customer = rental.Customer;
+            var oldMovie = Read(movie.MovieID);
+            oldMovie.Location = movie.Location;
+            oldMovie.MovieTitle = movie.MovieTitle;
+            oldMovie.Price = movie.Price;
+            oldMovie.Producer = movie.Producer;
+            oldMovie.Rentals = movie.Rentals;
+            oldMovie.Year = movie.Year;                   
+            db.SaveChanges();
         }
     }
 }

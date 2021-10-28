@@ -13,7 +13,7 @@ namespace DFQXYU_HFT_2021221.Data
     public class MovieDbContext : DbContext
     {
         public virtual DbSet<Movie> Movies { get; set; }
-        public virtual DbSet<Customer> Costumers { get; set; }
+        public virtual DbSet<Customer> Customers { get; set; }
         public virtual DbSet<MovieRental> MovieRentals { get; set; }
         public MovieDbContext()
         {
@@ -39,9 +39,9 @@ namespace DFQXYU_HFT_2021221.Data
             Customer c2 = new Customer() { CustomerID = 2, Name = "Kiss Kati", BornDate = new DateTime(2002, 01, 22), Email = "kissk@gmail.com", PhoneNumber = 0620333445 };
             Customer c3 = new Customer() { CustomerID = 3, Name = "Kiss Laci", BornDate = new DateTime(1999, 03, 14), Email = "kissl@gmail.com", PhoneNumber = 0620333446 };
 
-            MovieRental r1 = new MovieRental() { RentalID = 1, Promotions = false, Movie = m1, /*MovieID = m1.MovieID,*/ Costumer = c1/*, CostumerID = c1.CostumerID*/ };
-            MovieRental r2 = new MovieRental() { RentalID = 2, Promotions = false, Movie = m2,/* MovieID = m2.MovieID,*/ Costumer = c2/* CostumerID = c2.CostumerID*/ };
-            MovieRental r3 = new MovieRental() { RentalID = 3, Promotions = false, Movie = m3, /*MovieID = m3.MovieID,*/ Costumer = c3/*, CostumerID = c3.CostumerID*/ };
+            MovieRental r1 = new MovieRental() { RentalID = 1, Promotions = false, Movie = m1, /*MovieID = m1.MovieID,*/ Customer = c1/*, CostumerID = c1.CostumerID*/ };
+            MovieRental r2 = new MovieRental() { RentalID = 2, Promotions = false, Movie = m2,/* MovieID = m2.MovieID,*/ Customer = c2/* CostumerID = c2.CostumerID*/ };
+            MovieRental r3 = new MovieRental() { RentalID = 3, Promotions = false, Movie = m3, /*MovieID = m3.MovieID,*/ Customer = c3/*, CostumerID = c3.CostumerID*/ };
 
             m1.Rentals.Add(r1);
             m2.Rentals.Add(r2);
@@ -51,9 +51,9 @@ namespace DFQXYU_HFT_2021221.Data
             c2.Rentals.Add(r2);
             c3.Rentals.Add(r3);
 
-            r1.CostumerID = c1.CustomerID;
-            r2.CostumerID = c2.CustomerID;
-            r3.CostumerID = c3.CustomerID;
+            r1.CustomerID = c1.CustomerID;
+            r2.CustomerID = c2.CustomerID;
+            r3.CustomerID = c3.CustomerID;
 
             r1.MovieID = m1.MovieID;
             r2.MovieID = m2.MovieID;
@@ -71,8 +71,8 @@ namespace DFQXYU_HFT_2021221.Data
             modelBuilder.Entity<Customer>(entity =>
             {
                 entity.HasMany(c => c.Rentals)
-                .WithOne(r => r.Costumer)
-                .HasForeignKey(c => c.CostumerID)
+                .WithOne(r => r.Customer)
+                .HasForeignKey(c => c.CustomerID)
                 .OnDelete(DeleteBehavior.ClientSetNull);
             });
 
@@ -83,9 +83,9 @@ namespace DFQXYU_HFT_2021221.Data
                 .HasForeignKey(r => r.MovieID)
                 .OnDelete(DeleteBehavior.ClientSetNull);
 
-                entity.HasOne(r => r.Costumer)
+                entity.HasOne(r => r.Customer)
                .WithMany(m => m.Rentals)
-               .HasForeignKey(r => r.CostumerID)
+               .HasForeignKey(r => r.CustomerID)
                .OnDelete(DeleteBehavior.ClientSetNull);
             });
 

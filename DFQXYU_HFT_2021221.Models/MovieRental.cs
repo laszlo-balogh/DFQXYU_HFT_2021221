@@ -23,7 +23,7 @@ namespace DFQXYU_HFT_2021221.Models
         [NotMapped]
         public virtual Customer Customer { get; set; }
         [ForeignKey(nameof(Customer))]
-        public int CustumerID { get; set; }
+        public int CustomerID { get; set; }
         public MovieRental()
         {
             this.StartDate = DateTime.Now;
