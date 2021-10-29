@@ -12,6 +12,7 @@ namespace DFQXYU_HFT_2021221.Models
     public class MovieRental
     {
         [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int RentalID { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }

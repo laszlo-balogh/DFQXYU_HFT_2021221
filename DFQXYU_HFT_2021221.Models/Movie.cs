@@ -11,6 +11,7 @@ namespace DFQXYU_HFT_2021221.Models
     public class Movie
     {
         [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int MovieID { get; set; }
         [Required]
         public string MovieTitle { get; set; }

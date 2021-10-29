@@ -43,7 +43,7 @@ namespace DFQXYU_HFT_2021221.Repository
             var oldRental = Read(rental.RentalID);
             oldRental.Movie = rental.Movie;
             oldRental.MovieID = rental.MovieID;
-            oldRental.Promotions = rental.Promotions;          
+            oldRental.Promotions = rental.Promotions;
             oldRental.StartDate = rental.StartDate;
             oldRental.EndDate = rental.EndDate;
             oldRental.CustomerID = rental.CustomerID;

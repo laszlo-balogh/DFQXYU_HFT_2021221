@@ -12,6 +12,7 @@ namespace DFQXYU_HFT_2021221.Models
     public class Customer
     {
         [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int CustomerID { get; set; }
         [Required]
         public string Name { get; set; }
@@ -23,7 +24,11 @@ namespace DFQXYU_HFT_2021221.Models
         [MaxLength(9)]
         [MinLength(9)]
         public int PhoneNumber { get; set; }
+        [NotMapped]
         public virtual ICollection<MovieRental> Rentals { get; set; }
+
+        
+
 
         public Customer()
         {

@@ -39,9 +39,9 @@ namespace DFQXYU_HFT_2021221.Data
             Customer c2 = new Customer() { CustomerID = 2, Name = "Kiss Kati", BornDate = new DateTime(2002, 01, 22), Email = "kissk@gmail.com", PhoneNumber = 0620333445 };
             Customer c3 = new Customer() { CustomerID = 3, Name = "Kiss Laci", BornDate = new DateTime(1999, 03, 14), Email = "kissl@gmail.com", PhoneNumber = 0620333446 };
 
-            MovieRental r1 = new MovieRental() { RentalID = 1, Promotions = false, Movie = m1, /*MovieID = m1.MovieID,*/ Customer = c1/*, CostumerID = c1.CostumerID*/ };
-            MovieRental r2 = new MovieRental() { RentalID = 2, Promotions = false, Movie = m2,/* MovieID = m2.MovieID,*/ Customer = c2/* CostumerID = c2.CostumerID*/ };
-            MovieRental r3 = new MovieRental() { RentalID = 3, Promotions = false, Movie = m3, /*MovieID = m3.MovieID,*/ Customer = c3/*, CostumerID = c3.CostumerID*/ };
+            MovieRental r1 = new MovieRental() { RentalID = 1, Promotions = false, Movie = m1/*, MovieID = m1.MovieID, Customer = c1, CostumerID = c1.CostumerID*/ };
+            MovieRental r2 = new MovieRental() { RentalID = 2, Promotions = false, Movie = m2/*, MovieID = m2.MovieID, Customer = c2 CostumerID = c2.CostumerID*/ };
+            MovieRental r3 = new MovieRental() { RentalID = 3, Promotions = false, Movie = m3/*, MovieID = m3.MovieID, Customer = c3, CostumerID = c3.CostumerID*/ };
 
             m1.Rentals.Add(r1);
             m2.Rentals.Add(r2);
@@ -62,29 +62,29 @@ namespace DFQXYU_HFT_2021221.Data
 
             modelBuilder.Entity<Movie>(entity =>
             {
-                entity.HasMany(m => m.Rentals)
-                .WithOne(r => r.Movie)
+                entity.HasMany<MovieRental>(/*m => m.Rentals*/)
+                .WithOne(/*r => r.Movie*/)
                 .HasForeignKey(m => m.MovieID)
                 .OnDelete(DeleteBehavior.ClientSetNull);
             });
 
             modelBuilder.Entity<Customer>(entity =>
             {
-                entity.HasMany(c => c.Rentals)
-                .WithOne(r => r.Customer)
+                entity.HasMany<MovieRental>(/*c => c.Rentals*/)
+                .WithOne(/*r => r.Customer*/)
                 .HasForeignKey(c => c.CustomerID)
                 .OnDelete(DeleteBehavior.ClientSetNull);
             });
 
             modelBuilder.Entity<MovieRental>(entity =>
             {
-                entity.HasOne(r => r.Movie)
-                .WithMany(m => m.Rentals)
+                entity.HasOne<Movie>(/*r => r.Movie*/)
+                .WithMany(/*m => m.Rentals*/)
                 .HasForeignKey(r => r.MovieID)
                 .OnDelete(DeleteBehavior.ClientSetNull);
 
-                entity.HasOne(r => r.Customer)
-               .WithMany(m => m.Rentals)
+                entity.HasOne<Customer>(/*r => r.Customer*/)
+               .WithMany(/*c => c.Rentals*/)
                .HasForeignKey(r => r.CustomerID)
                .OnDelete(DeleteBehavior.ClientSetNull);
             });
@@ -94,7 +94,7 @@ namespace DFQXYU_HFT_2021221.Data
             modelBuilder.Entity<Movie>().HasData(m1, m2, m3, m4);
             modelBuilder.Entity<Customer>().HasData(c1, c2, c3);
             modelBuilder.Entity<MovieRental>().HasData(r1, r2, r3);
-
+            
             
         }
     }
