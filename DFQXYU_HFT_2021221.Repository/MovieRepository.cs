@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace DFQXYU_HFT_2021221.Repository
 {
-   public class MovieRepository : IMovieRepository
+    public class MovieRepository : IMovieRepository
     {
         MovieDbContext db;
 
