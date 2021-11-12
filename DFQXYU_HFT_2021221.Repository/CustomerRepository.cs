@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace DFQXYU_HFT_2021221.Repository
 {
-    class CustomerRepository : ICustomerRepository
+   public class CustomerRepository : ICustomerRepository
     {
         MovieDbContext db;
         public CustomerRepository(MovieDbContext db)
