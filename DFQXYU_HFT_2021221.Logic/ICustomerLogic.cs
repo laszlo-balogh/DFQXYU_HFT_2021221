@@ -5,9 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DFQXYU_HFT_2021221.Repository
+namespace DFQXYU_HFT_2021221.Logic
 {
-    public interface ICustomerRepository
+    public interface ICustomerLogic
     {
         void Create(Customer customer);
         void Delete(int id);

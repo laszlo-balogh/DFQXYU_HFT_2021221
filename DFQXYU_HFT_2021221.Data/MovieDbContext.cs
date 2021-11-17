@@ -37,7 +37,7 @@ namespace DFQXYU_HFT_2021221.Data
 
             Customer c1 = new Customer() { CustomerID = 1, Name = "Kiss Béla", BornDate = new DateTime(2000, 11, 02), Email = "kissb@gmail.com", PhoneNumber = 0620333444 };
             Customer c2 = new Customer() { CustomerID = 2, Name = "Kiss Kati", BornDate = new DateTime(2002, 01, 22), Email = "kissk@gmail.com", PhoneNumber = 0620333445 };
-            Customer c3 = new Customer() { CustomerID = 3, Name = "Kiss Laci", BornDate = new DateTime(1999, 03, 14), Email = "kissl@gmail.com", PhoneNumber = 0620333446 };
+            Customer c3 = new Customer() { CustomerID = 3, Name = "Kiss Laci", BornDate = new DateTime(1999, 03, 14), Email = "kissl@gmail.com", PhoneNumber = 0620333446,RegularCustomer=true };
 
             MovieRental r1 = new MovieRental() { RentalID = 1, Promotions = false, Movie = m1/*, MovieID = m1.MovieID, Customer = c1, CostumerID = c1.CostumerID*/ };
             MovieRental r2 = new MovieRental() { RentalID = 2, Promotions = false, Movie = m2/*, MovieID = m2.MovieID, Customer = c2 CostumerID = c2.CostumerID*/ };
@@ -54,6 +54,10 @@ namespace DFQXYU_HFT_2021221.Data
             r1.CustomerID = c1.CustomerID;
             r2.CustomerID = c2.CustomerID;
             r3.CustomerID = c3.CustomerID;
+
+            //r1.Customer = c1;
+            //r2.Customer = c2;
+            //r3.Customer = c3;
 
             r1.MovieID = m1.MovieID;
             r2.MovieID = m2.MovieID;

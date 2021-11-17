@@ -5,17 +5,17 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DFQXYU_HFT_2021221.Repository
+namespace DFQXYU_HFT_2021221.Logic
 {
-    public interface IMovieRentalRepository
+    public interface IMovieReantalLogic
     {
         void Create(MovieRental rental);
         void Delete(int id);
         MovieRental Read(int id);
-        IQueryable<MovieRental> ReadAll();
+        IEnumerable<MovieRental> ReadAll();
         void Update(MovieRental rental);
 
-
-
+        IEnumerable<object> Before2000();
+        IEnumerable<object> IsRegularCustomer();
     }
 }

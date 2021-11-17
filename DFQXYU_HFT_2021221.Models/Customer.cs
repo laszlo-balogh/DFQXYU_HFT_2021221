@@ -26,13 +26,15 @@ namespace DFQXYU_HFT_2021221.Models
         public int PhoneNumber { get; set; }
         [NotMapped]
         public virtual ICollection<MovieRental> Rentals { get; set; }
+        public bool RegularCustomer { get; set; }
 
-        
+
 
 
         public Customer()
         {
             this.Rentals = new HashSet<MovieRental>();
+            this.RegularCustomer = false;
         }
 
     }
