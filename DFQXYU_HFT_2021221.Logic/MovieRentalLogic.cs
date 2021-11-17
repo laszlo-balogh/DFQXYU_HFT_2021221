@@ -34,6 +34,21 @@ namespace DFQXYU_HFT_2021221.Logic
                      };
             return v1.ToList();
         }
+        public IEnumerable<object> NotJamesCameronAndCustomerBornDateIs2000()
+        {
+            var v1 = from movie in movieRepo.ReadAll()
+                     join rental in movieRentalRepo.ReadAll()
+                     on movie.MovieID equals rental.MovieID
+                     join customer in customerRepo.ReadAll()
+                     on rental.CustomerID equals customer.CustomerID
+                     where !movie.Producer.Contains("James Cameron") && customer.BornDate.Year == 2000
+                     select new
+                     {
+                         CustomerNamr = customer.Name,
+                         RentalID= rental.RentalID
+                     };
+            return v1.ToList();
+        }
         public IEnumerable<object> IsRegularCustomer()
         {
             var v1 = from x in movieRentalRepo.ReadAll()
@@ -46,38 +61,33 @@ namespace DFQXYU_HFT_2021221.Logic
                          CustomerName = customer.Name,
                          RegularCustomer = customer.RegularCustomer,
                          BornDate = customer.BornDate
-
                      };
             return v1.ToList();
-
-
         }
 
         public void Create(MovieRental rental)
         {
-            throw new NotImplementedException();
+            this.movieRentalRepo.Create(rental);
         }
 
         public void Delete(int id)
         {
-            throw new NotImplementedException();
+            this.movieRentalRepo.Delete(id);
         }
-
-
 
         public MovieRental Read(int id)
         {
-            throw new NotImplementedException();
+            return this.movieRentalRepo.Read(id);
         }
 
         public IEnumerable<MovieRental> ReadAll()
         {
-            throw new NotImplementedException();
+            return this.movieRentalRepo.ReadAll();
         }
 
         public void Update(MovieRental rental)
         {
-            throw new NotImplementedException();
+            this.movieRentalRepo.Update(rental);
         }
     }
 }

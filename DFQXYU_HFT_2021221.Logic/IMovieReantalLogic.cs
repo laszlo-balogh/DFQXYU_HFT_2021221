@@ -17,5 +17,6 @@ namespace DFQXYU_HFT_2021221.Logic
 
         IEnumerable<object> Before2000();
         IEnumerable<object> IsRegularCustomer();
+        IEnumerable<object> NotJamesCameronAndCustomerBornDateIs2000();
     }
 }

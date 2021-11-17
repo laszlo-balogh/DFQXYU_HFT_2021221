@@ -21,7 +21,7 @@ namespace DFQXYU_HFT_2021221.Client
 
             var var1 = ml.Before2000();
             var var2 = ml.IsRegularCustomer();
-
+            var var3 = ml.NotJamesCameronAndCustomerBornDateIs2000();
             ;
 
 

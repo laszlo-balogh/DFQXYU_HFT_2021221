@@ -13,6 +13,6 @@ namespace DFQXYU_HFT_2021221.Logic
         void Delete(int id);
         Movie Read(int id);
         IEnumerable<Movie> ReadAll();
-        void Update(Movie novie);
+        void Update(Movie movie);
     }
 }

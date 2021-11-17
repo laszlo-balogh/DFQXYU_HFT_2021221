@@ -13,6 +13,6 @@ namespace DFQXYU_HFT_2021221.Repository
         void Delete(int id);
         Movie Read(int id);
         IQueryable<Movie> ReadAll();
-        void Update(Movie novie);
+        void Update(Movie movie);
     }
 }

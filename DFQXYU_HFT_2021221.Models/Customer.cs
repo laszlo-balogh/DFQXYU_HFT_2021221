@@ -27,10 +27,6 @@ namespace DFQXYU_HFT_2021221.Models
         [NotMapped]
         public virtual ICollection<MovieRental> Rentals { get; set; }
         public bool RegularCustomer { get; set; }
-
-
-
-
         public Customer()
         {
             this.Rentals = new HashSet<MovieRental>();
