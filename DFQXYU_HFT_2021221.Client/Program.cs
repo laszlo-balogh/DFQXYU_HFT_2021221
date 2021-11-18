@@ -23,6 +23,8 @@ namespace DFQXYU_HFT_2021221.Client
             var var2 = ml.RentalsWithIsRegularCustomer();
             var var3 = ml.RentalsWithNotJamesCameronAndCustomerBornDateIs2000();
             var var4 = ml.RentalsWithJamesCameronMovies();
+            var var5 = ml.RentalsByCustomerNames();           
+
             ;
 
 

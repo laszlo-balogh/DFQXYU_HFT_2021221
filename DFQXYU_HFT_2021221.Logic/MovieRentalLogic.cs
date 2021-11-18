@@ -44,14 +44,26 @@ namespace DFQXYU_HFT_2021221.Logic
                      where !movie.Producer.Contains("James Cameron") && customer.BornDate.Year == 2000
                      select new
                      {
-                         CustomerNamr = customer.Name,
-                         RentalID= rental.RentalID
+                         CustomerName = customer.Name,
+                         RentalID = rental.RentalID
                      };
             return v1.ToList();
         }
         public IEnumerable<object> RentalsByCustomerNames()
         {
-            throw new NotImplementedException();
+            var v1 = from customer in customerRepo.ReadAll()
+                     join rental in movieRentalRepo.ReadAll()
+                     on customer.CustomerID equals rental.CustomerID
+                     join movie in movieRepo.ReadAll()
+                     on rental.MovieID equals movie.MovieID
+                     select new
+                     {                         
+                         Name = customer.Name,
+                         RentalID=rental.RentalID,
+                         Movie = movie.MovieTitle
+                     };
+            var v2 = v1.AsEnumerable().GroupBy(x => x.Name);
+            return v2.ToList();
         }
         public IEnumerable<object> RentalsWithIsRegularCustomer()
         {
@@ -66,7 +78,8 @@ namespace DFQXYU_HFT_2021221.Logic
                          RegularCustomer = customer.RegularCustomer,
                          BornDate = customer.BornDate
                      };
-            return v1.ToList();
+            var v2 = v1.AsEnumerable().GroupBy(x => x.CustomerName);
+            return v2.ToList();
         }
 
         public IEnumerable<object> RentalsWithJamesCameronMovies()
@@ -74,14 +87,14 @@ namespace DFQXYU_HFT_2021221.Logic
             var v1 = from x in movieRentalRepo.ReadAll()
                      join movie in movieRepo.ReadAll()
                      on x.MovieID equals movie.MovieID
-                     where movie.Producer == "James Cameron"
+                     where movie.Producer.Contains("James Cameron")
                      select new
                      {
                          MovieID = movie.MovieID,
                          MovieTitle = movie.MovieTitle,
                          Year = movie.Year,
                          Price = movie.Price,
-                         RentalID= x.RentalID
+                         RentalID = x.RentalID
                      };
             return v1.ToList();
         }
@@ -109,6 +122,6 @@ namespace DFQXYU_HFT_2021221.Logic
         public void Update(MovieRental rental)
         {
             this.movieRentalRepo.Update(rental);
-        }        
+        }
     }
 }

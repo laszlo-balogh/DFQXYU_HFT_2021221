@@ -46,6 +46,10 @@ namespace DFQXYU_HFT_2021221.Logic
             {
                 throw new ArgumentException("Wrong phone number format");
             }
+            else if (customer.PhoneNumber<0)
+            {
+                throw new ArgumentException("Wrong phone number format");
+            }
             else
             {
                this.customerRepo.Create(customer);
