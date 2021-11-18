@@ -37,31 +37,38 @@ namespace DFQXYU_HFT_2021221.Data
 
             Customer c1 = new Customer() { CustomerID = 1, Name = "Kiss Béla", BornDate = new DateTime(2000, 11, 02), Email = "kissb@gmail.com", PhoneNumber = 0620333444 };
             Customer c2 = new Customer() { CustomerID = 2, Name = "Kiss Kati", BornDate = new DateTime(2002, 01, 22), Email = "kissk@gmail.com", PhoneNumber = 0620333445 };
-            Customer c3 = new Customer() { CustomerID = 3, Name = "Kiss Laci", BornDate = new DateTime(1999, 03, 14), Email = "kissl@gmail.com", PhoneNumber = 0620333446,RegularCustomer=true };
+            Customer c3 = new Customer() { CustomerID = 3, Name = "Kiss Laci", BornDate = new DateTime(1999, 03, 14), Email = "kissl@gmail.com", PhoneNumber = 0620333446, RegularCustomer = true };
+            Customer c4 = new Customer() { CustomerID = 4, Name = "Nagy Laci", BornDate = new DateTime(2000, 04, 25), Email = "nagyl@gmail.com", PhoneNumber = 0670323567, RegularCustomer = true };
 
             MovieRental r1 = new MovieRental() { RentalID = 1, Promotions = false, Movie = m1/*, MovieID = m1.MovieID, Customer = c1, CostumerID = c1.CostumerID*/ };
             MovieRental r2 = new MovieRental() { RentalID = 2, Promotions = false, Movie = m2/*, MovieID = m2.MovieID, Customer = c2 CostumerID = c2.CostumerID*/ };
             MovieRental r3 = new MovieRental() { RentalID = 3, Promotions = false, Movie = m3/*, MovieID = m3.MovieID, Customer = c3, CostumerID = c3.CostumerID*/ };
+            MovieRental r4 = new MovieRental() { RentalID = 4, Promotions = true, Movie = m4/*, MovieID = m3.MovieID, Customer = c3, CostumerID = c3.CostumerID*/ };
 
             m1.Rentals.Add(r1);
             m2.Rentals.Add(r2);
             m3.Rentals.Add(r3);
+            m4.Rentals.Add(r4);
 
             c1.Rentals.Add(r1);
             c2.Rentals.Add(r2);
             c3.Rentals.Add(r3);
+            c4.Rentals.Add(r4);
 
             r1.CustomerID = c1.CustomerID;
             r2.CustomerID = c2.CustomerID;
             r3.CustomerID = c3.CustomerID;
+            r4.CustomerID = c4.CustomerID;
 
             //r1.Customer = c1;
             //r2.Customer = c2;
             //r3.Customer = c3;
+            //r4.Customer = c4;
 
             r1.MovieID = m1.MovieID;
             r2.MovieID = m2.MovieID;
             r3.MovieID = m3.MovieID;
+            r4.MovieID = m4.MovieID;
 
 
             modelBuilder.Entity<Movie>(entity =>
@@ -96,10 +103,10 @@ namespace DFQXYU_HFT_2021221.Data
 
 
             modelBuilder.Entity<Movie>().HasData(m1, m2, m3, m4);
-            modelBuilder.Entity<Customer>().HasData(c1, c2, c3);
-            modelBuilder.Entity<MovieRental>().HasData(r1, r2, r3);
-            
-            
+            modelBuilder.Entity<Customer>().HasData(c1, c2, c3, c4);
+            modelBuilder.Entity<MovieRental>().HasData(r1, r2, r3, r4);
+
+
         }
     }
 }

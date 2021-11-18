@@ -15,8 +15,10 @@ namespace DFQXYU_HFT_2021221.Logic
         IEnumerable<MovieRental> ReadAll();
         void Update(MovieRental rental);
 
-        IEnumerable<object> Before2000();
-        IEnumerable<object> IsRegularCustomer();
-        IEnumerable<object> NotJamesCameronAndCustomerBornDateIs2000();
+        IEnumerable<object> RentalsWithBefore2000();
+        IEnumerable<object> RentalsWithIsRegularCustomer();
+        IEnumerable<object> RentalsWithNotJamesCameronAndCustomerBornDateIs2000();
+        IEnumerable<object> RentalsWithJamesCameronMovies();
+        IEnumerable<object> RentalsByCustomerNames();
     }
 }

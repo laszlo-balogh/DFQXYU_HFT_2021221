@@ -19,9 +19,10 @@ namespace DFQXYU_HFT_2021221.Client
 
             IMovieReantalLogic ml = new MovieRentalLogic(new MovieRentalRepository(db), new MovieRepository(db), new CustomerRepository(db));
 
-            var var1 = ml.Before2000();
-            var var2 = ml.IsRegularCustomer();
-            var var3 = ml.NotJamesCameronAndCustomerBornDateIs2000();
+            var var1 = ml.RentalsWithBefore2000();
+            var var2 = ml.RentalsWithIsRegularCustomer();
+            var var3 = ml.RentalsWithNotJamesCameronAndCustomerBornDateIs2000();
+            var var4 = ml.RentalsWithJamesCameronMovies();
             ;
 
 

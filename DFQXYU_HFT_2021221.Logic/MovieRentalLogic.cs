@@ -20,7 +20,7 @@ namespace DFQXYU_HFT_2021221.Logic
             this.movieRepo = movieRepo;
             this.customerRepo = customerRepo;
         }
-        public IEnumerable<object> Before2000()
+        public IEnumerable<object> RentalsWithBefore2000()
         {
             var v1 = from x in movieRentalRepo.ReadAll()
                      join movie in movieRepo.ReadAll()
@@ -34,7 +34,7 @@ namespace DFQXYU_HFT_2021221.Logic
                      };
             return v1.ToList();
         }
-        public IEnumerable<object> NotJamesCameronAndCustomerBornDateIs2000()
+        public IEnumerable<object> RentalsWithNotJamesCameronAndCustomerBornDateIs2000()
         {
             var v1 = from movie in movieRepo.ReadAll()
                      join rental in movieRentalRepo.ReadAll()
@@ -49,7 +49,11 @@ namespace DFQXYU_HFT_2021221.Logic
                      };
             return v1.ToList();
         }
-        public IEnumerable<object> IsRegularCustomer()
+        public IEnumerable<object> RentalsByCustomerNames()
+        {
+            throw new NotImplementedException();
+        }
+        public IEnumerable<object> RentalsWithIsRegularCustomer()
         {
             var v1 = from x in movieRentalRepo.ReadAll()
                      join customer in customerRepo.ReadAll()
@@ -61,6 +65,23 @@ namespace DFQXYU_HFT_2021221.Logic
                          CustomerName = customer.Name,
                          RegularCustomer = customer.RegularCustomer,
                          BornDate = customer.BornDate
+                     };
+            return v1.ToList();
+        }
+
+        public IEnumerable<object> RentalsWithJamesCameronMovies()
+        {
+            var v1 = from x in movieRentalRepo.ReadAll()
+                     join movie in movieRepo.ReadAll()
+                     on x.MovieID equals movie.MovieID
+                     where movie.Producer == "James Cameron"
+                     select new
+                     {
+                         MovieID = movie.MovieID,
+                         MovieTitle = movie.MovieTitle,
+                         Year = movie.Year,
+                         Price = movie.Price,
+                         RentalID= x.RentalID
                      };
             return v1.ToList();
         }
@@ -88,6 +109,6 @@ namespace DFQXYU_HFT_2021221.Logic
         public void Update(MovieRental rental)
         {
             this.movieRentalRepo.Update(rental);
-        }
+        }        
     }
 }
