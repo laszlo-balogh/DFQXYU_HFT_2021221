@@ -33,9 +33,9 @@ namespace DFQXYU_HFT_2021221.Logic
             {
                 throw new ArgumentException("Year cannot be negative");
             }
-            else if (movie.Price < 0)
+            else if (movie.Price < 0 || movie.Price == null)
             {
-                throw new ArgumentException("Price cannot be negative");
+                throw new ArgumentException("Price input is not allowed");
             }
             else
             {
@@ -80,9 +80,9 @@ namespace DFQXYU_HFT_2021221.Logic
             {
                 throw new ArgumentNullException("Wrong format");
             }
-            else if (movie.Price < 0)
+            else if (movie.Price < 0 || movie.Price == null)
             {
-                throw new ArgumentException("Price cannot be negative");
+                throw new ArgumentException("Price input is not allowed");
             }
             this.movieRepo.Update(movie);
         }

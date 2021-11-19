@@ -22,13 +22,17 @@ namespace DFQXYU_HFT_2021221.Logic
             {
                 throw new ArgumentNullException("customer");
             }
-            else if (customer.Name == null)
+            else if (customer.Name == null || customer.Name.Length == 0)
             {
                 throw new ArgumentException("Name cannot be null");
             }
             else if (customer.BornDate == default)
             {
                 throw new ArgumentException("Born date cannot be empty");
+            }
+            else if (customer.PhoneNumber.ToString().Length != 9 || customer.PhoneNumber < 0 || customer.PhoneNumber == 0)
+            {
+                throw new ArgumentException("Wrong phone number format");
             }
             else if (customer.Email == null)
             {
@@ -46,17 +50,17 @@ namespace DFQXYU_HFT_2021221.Logic
                     throw new ArgumentException("Wrong email format");
                 }
             }
-            else if (customer.PhoneNumber.ToString().Length < 9 || customer.PhoneNumber.ToString().Length > 9)
+            else if (!customer.Email.Contains('@'))
             {
-                throw new ArgumentException("Wrong phone number format");
+                throw new ArgumentException("Wrong email format");
             }
-            else if (customer.PhoneNumber<0)
-            {
-                throw new ArgumentException("Wrong phone number format");
-            }
+            //else if (customer.PhoneNumber.ToString().Length !=9 || customer.PhoneNumber < 0 || customer.PhoneNumber == 0)
+            //{
+            //    throw new ArgumentException("Wrong phone number format");
+            //}           
             else
             {
-               this.customerRepo.Create(customer);
+                this.customerRepo.Create(customer);
             }
         }
 
