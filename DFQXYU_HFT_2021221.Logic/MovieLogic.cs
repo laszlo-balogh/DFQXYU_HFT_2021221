@@ -45,11 +45,19 @@ namespace DFQXYU_HFT_2021221.Logic
 
         public void Delete(int id)
         {
+            if (id < 1)
+            {
+                throw new IndexOutOfRangeException("Minimum id value is 1");
+            }
             this.movieRepo.Delete(id);
         }
 
         public Movie Read(int id)
         {
+            if (id < 1)
+            {
+                throw new IndexOutOfRangeException("Minimum id value is 1");
+            }
             return this.movieRepo.Read(id);
         }
 
