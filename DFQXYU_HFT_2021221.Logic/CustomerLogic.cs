@@ -28,7 +28,7 @@ namespace DFQXYU_HFT_2021221.Logic
             }
             else if (customer.BornDate == default)
             {
-                throw new ArgumentException("Born date cnnot be empty");
+                throw new ArgumentException("Born date cannot be empty");
             }
             else if (customer.Email == null)
             {

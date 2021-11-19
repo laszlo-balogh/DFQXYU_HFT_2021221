@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace DFQXYU_HFT_2021221.Models
 {
+    [Table("Movies")]
     public class Movie
     {
         [Key]

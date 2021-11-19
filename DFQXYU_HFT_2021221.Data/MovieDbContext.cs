@@ -8,8 +8,7 @@ using DFQXYU_HFT_2021221.Models;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DFQXYU_HFT_2021221.Data
-{
-    [Table("Movies")]
+{    
     public class MovieDbContext : DbContext
     {
         public virtual DbSet<Movie> Movies { get; set; }
@@ -18,6 +17,11 @@ namespace DFQXYU_HFT_2021221.Data
         public MovieDbContext()
         {
             this.Database.EnsureCreated();
+        }
+
+        public MovieDbContext(DbContextOptions<MovieDbContext> options ) :base(options)
+        {
+
         }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

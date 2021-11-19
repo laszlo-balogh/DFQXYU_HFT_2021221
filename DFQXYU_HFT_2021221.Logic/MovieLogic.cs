@@ -21,15 +21,19 @@ namespace DFQXYU_HFT_2021221.Logic
             {
                 throw new ArgumentNullException("movie");
             }
-            else if (movie.MovieTitle==null)
+            else if (movie.MovieTitle == null)
             {
                 throw new ArgumentNullException("MovieTitle cannot be null");
             }
-            else if (movie.Year.ToString().Length>4 || movie.Year < 0)
+            else if (movie.Year.ToString().Length > 4 || movie.Year < 0)
             {
                 throw new ArgumentNullException("Wrong format");
             }
-            else if (movie.Price<0)
+            else if (movie.Year < 0)
+            {
+                throw new ArgumentException("Year cannot be negative");
+            }
+            else if (movie.Price < 0)
             {
                 throw new ArgumentException("Price cannot be negative");
             }
