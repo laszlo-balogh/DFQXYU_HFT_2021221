@@ -53,7 +53,7 @@ namespace DFQXYU_HFT_2021221.Test
                 Email = "nagy.geza@gmail.com",
                 PhoneNumber = 203334568,
                 RegularCustomer = false
-            };            
+            };
 
             mockMovieREntalRepository.Setup(
                 t => t.Create(It.IsAny<MovieRental>())
@@ -88,17 +88,41 @@ namespace DFQXYU_HFT_2021221.Test
                 );
             mockCustomerRepository.Setup(t => t.ReadAll()
             ).Returns(
-                new List<Customer>() {fakeCustomer,fakeCustomer2 }.AsQueryable()
+                new List<Customer>() { fakeCustomer, fakeCustomer2 }.AsQueryable()
                 );
             movieRentalLogic = new MovieRentalLogic(mockMovieREntalRepository.Object,
-                mockMovieRepository.Object,mockCustomerRepository.Object);
+                mockMovieRepository.Object, mockCustomerRepository.Object);
         }
 
-        [TestCase(true, "Troy",2004, "Wolfgang Petersen","USA",2000)]
-        [TestCase(false, "Troy",2004, "Wolfgang Petersen","USA",2000)]
-        public void CreateMovieTest(bool result,string movieTitle,int year,string producer, string location,int price)
+        [TestCase(true, "Troy", 2004, "Wolfgang Petersen", "USA", 2000)]
+        [TestCase(false, null, 2004, "Wolfgang Petersen", "USA", 2000)]
+        [TestCase(false, "Avangers", -2004, "Wolfgang Petersen", "USA", 2000)]
+        [TestCase(false, "Avangers", 20040, "Wolfgang Petersen", "USA", 2000)]
+        [TestCase(false, "Avangers", 2004, "Wolfgang Petersen", "USA", -2000)]
+        [TestCase(false, "Avangers", 2004, "Wolfgang Petersen", "USA", null)]
+        public void CreateMovieTest(bool result, string movieTitle, int year, string producer, string location, int price)
         {
+            if (result)
+            {
+                Assert.That(
+                    () =>
+                    {
+                        movieRentalLogic.Create(
+                            new Movie()
+                            {
+                                MovieTitle = movieTitle,
+                                Year = year,
+                                Producer = producer,
+                                Location = location,
+                                Price=price
+                            });
+                    },Throws.Nothing
+                    );
+            }
+            else
+            {
 
+            }
         }
     }
 }
