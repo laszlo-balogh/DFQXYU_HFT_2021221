@@ -51,17 +51,18 @@ namespace DFQXYU_HFT_2021221.Logic
         }
         public IEnumerable<object> RentalsByCustomerNames()
         {
-            var v1 = from customer in customerRepo.ReadAll()
-                     join rental in movieRentalRepo.ReadAll()
-                     on customer.CustomerID equals rental.CustomerID
-                     join movie in movieRepo.ReadAll()
-                     on rental.MovieID equals movie.MovieID
-                     select new
-                     {                         
-                         Name = customer.Name,
-                         RentalID=rental.RentalID,
-                         Movie = movie.MovieTitle
-                     };
+            var v1 =/*from x in movieRentalRepo.ReadAll()*/
+                    from customer in customerRepo.ReadAll()
+                    join rental in movieRentalRepo.ReadAll()
+                    on customer.CustomerID equals rental.CustomerID
+                    join movie in movieRepo.ReadAll()
+                    on rental.MovieID equals movie.MovieID
+                    select new
+                    {
+                        Name = customer.Name,
+                        RentalID = rental.RentalID,
+                        Movie = movie.MovieTitle
+                    };
             var v2 = v1.AsEnumerable().GroupBy(x => x.Name);
             return v2.ToList();
         }
