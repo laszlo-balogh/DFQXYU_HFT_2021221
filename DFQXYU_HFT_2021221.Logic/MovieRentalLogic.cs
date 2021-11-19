@@ -101,6 +101,10 @@ namespace DFQXYU_HFT_2021221.Logic
 
         public void Create(MovieRental rental)
         {
+            if (rental == null)
+            {
+                throw new ArgumentNullException("rental");
+            }
             this.movieRentalRepo.Create(rental);
         }
 
@@ -121,6 +125,10 @@ namespace DFQXYU_HFT_2021221.Logic
 
         public void Update(MovieRental rental)
         {
+            if (rental == null)
+            {
+                throw new ArgumentNullException("rental");
+            }
             this.movieRentalRepo.Update(rental);
         }
     }
