@@ -6,9 +6,13 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\DFQXYU_HFT_2021221.Data\DFQXYU_HFT_2021221.Data.csproj" />
-    <ProjectReference Include="..\DFQXYU_HFT_2021221.Logic\DFQXYU_HFT_2021221.Logic.csproj" />
-    <ProjectReference Include="..\DFQXYU_HFT_2021221.Models\DFQXYU_HFT_2021221.Models.csproj" />
+    <PackageReference Include="Microsoft.AspNet.WebApi.Client" Version="5.2.7" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\DFQXYU_HFT_2021221.Models\DFQXYU_HFT_2021221.Models.csproj">
+      <TreatAsUsed>true</TreatAsUsed>
+    </ProjectReference>
   </ItemGroup>
 
 </Project>
