@@ -41,10 +41,7 @@ namespace DFQXYU_HFT_2021221.Endpoint
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapGet("/", async context =>
-                {
-                    endpoints.MapControllers();
-                });
+                endpoints.MapControllers();
             });
         }
     }
