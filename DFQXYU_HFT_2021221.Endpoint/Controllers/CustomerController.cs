@@ -11,7 +11,7 @@ namespace DFQXYU_HFT_2021221.Endpoint.Controllers
 {
     [Route("[controller]")]
     [ApiController]
-    public class CustomerController
+    public class CustomerController : ControllerBase
     {
         ICustomerLogic customerLogic;
         public CustomerController(ICustomerLogic customerLogic)

@@ -11,7 +11,7 @@ namespace DFQXYU_HFT_2021221.Endpoint.Controllers
 {
     [Route("[controller]")]
     [ApiController]
-    public class MovieRentalController
+    public class MovieRentalController : ControllerBase
     {
         IMovieReantalLogic rentalLogic;
         public MovieRentalController(IMovieReantalLogic rentalLogic)
