@@ -1,3 +1,6 @@
+using DFQXYU_HFT_2021221.Data;
+using DFQXYU_HFT_2021221.Logic;
+using DFQXYU_HFT_2021221.Repository;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -16,6 +19,14 @@ namespace DFQXYU_HFT_2021221.Endpoint
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddControllers();
+            services.AddTransient<IMovieLogic, MovieLogic>();
+            services.AddTransient<ICustomerLogic, CustomerLogic>();
+            services.AddTransient<IMovieReantalLogic, MovieRentalLogic>();
+            services.AddTransient<IMovieRepository, MovieRepository>();
+            services.AddTransient<ICustomerRepository, CustomerRepository>();
+            services.AddTransient<IMovieRentalRepository, MovieRentalRepository>();
+            services.AddTransient<MovieDbContext, MovieDbContext>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
