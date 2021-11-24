@@ -4,9 +4,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 16.0.31727.386
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DFQXYU_HFT_2021221.Client", "DFQXYU_HFT_2021221.Client\DFQXYU_HFT_2021221.Client.csproj", "{6A4FBEAB-3953-4F03-8B75-AFD5DFBA74A3}"
-	ProjectSection(ProjectDependencies) = postProject
-		{74525102-EBA0-4CBA-9D23-698347C4AB5E} = {74525102-EBA0-4CBA-9D23-698347C4AB5E}
-	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DFQXYU_HFT_2021221.Models", "DFQXYU_HFT_2021221.Models\DFQXYU_HFT_2021221.Models.csproj", "{1CEE74E7-21A2-4A5C-91ED-711F42B3B1B8}"
 EndProject
