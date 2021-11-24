@@ -326,6 +326,15 @@ namespace DFQXYU_HFT_2021221.Test
                 }, Throws.Exception
                 );
         }
+
+        [Test]
+        public void TestRentalsWithBefore2000()
+        {
+            var result = movieRentalLogic.RentalsWithBefore2000().ToArray();
+            Assert.That(result[0], Is.EqualTo(new { 
+            //new Movie() { MovieID = 1},
+            }));
+        }
     }
 
 }
