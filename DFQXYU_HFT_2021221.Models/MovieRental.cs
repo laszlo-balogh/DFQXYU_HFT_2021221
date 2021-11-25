@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace DFQXYU_HFT_2021221.Models
@@ -20,10 +21,12 @@ namespace DFQXYU_HFT_2021221.Models
         [NotMapped]
         public virtual Movie Movie { get; set; }
         [ForeignKey(nameof(Movie))]
+        [JsonIgnore]
         public int MovieID { get; set; }
         [NotMapped]
         public virtual Customer Customer { get; set; }
         [ForeignKey(nameof(Customer))]
+        [JsonIgnore]
         public int CustomerID { get; set; }
         public MovieRental()
         {
