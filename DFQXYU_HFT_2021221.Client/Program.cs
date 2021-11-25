@@ -19,7 +19,16 @@ namespace DFQXYU_HFT_2021221.Client
             MovieRentalLogic log = new MovieRentalLogic(new MovieRentalRepository(db),new MovieRepository(db),new CustomerRepository(db));
 
             var v = log.RentalsByCustomerNames();
-            var v2 = log.RentalsByCustomerNames();
+            var v2 = log.RentalsByCustomerNames().ToArray();
+            //foreach (var item in v2)
+            //{
+            //    foreach (var sas in item)
+            //    {
+
+            //    }
+            //}
+           var v4= v2[1].ToString();
+
             ;
 
             RestService restService = new RestService("http://localhost:47417/");
