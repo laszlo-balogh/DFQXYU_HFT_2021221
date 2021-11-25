@@ -26,35 +26,39 @@ namespace DFQXYU_HFT_2021221.Test
 
             Movie fakeMovie = new Movie()
             {
+                MovieID = 1,
                 MovieTitle = "Troy",
-                Year = 2004,
+                Year = 1999, // 2004
                 Producer = "Wolfgang Petersen",
                 Location = "USA",
                 Price = 2000
             };
             Movie fakeMovie2 = new Movie()
             {
+                MovieID = 2,
                 MovieTitle = "Pirates of the Caribbean",
                 Year = 2003,
-                Producer = "Gore Verbinski",
+                Producer = "James Cameron", //not really
                 Location = "USA",
                 Price = 4000
             };
             Customer fakeCustomer = new Customer()
             {
+                CustomerID = 1,
                 Name = "Kiss Dániel",
-                BornDate = new DateTime(1999, 08, 11),
+                BornDate = new DateTime(2000, 08, 11),
                 Email = "kiss.daniel@gmail.com",
                 PhoneNumber = 203334567,
                 RegularCustomer = false
             };
             Customer fakeCustomer2 = new Customer()
             {
+                CustomerID = 2,
                 Name = "Nagy Géza",
-                BornDate = new DateTime(2005, 07, 31),
+                BornDate = new DateTime(2000, 07, 31),
                 Email = "nagy.geza@gmail.com",
                 PhoneNumber = 203334568,
-                RegularCustomer = false
+                RegularCustomer = true
             };
 
             mockMovieREntalRepository.Setup(
@@ -72,15 +76,22 @@ namespace DFQXYU_HFT_2021221.Test
                 {
                     new MovieRental()
                     {
+                        RentalID=1,
                         Promotions = false,
                         Movie=fakeMovie,
-                        Customer=fakeCustomer
+                        Customer=fakeCustomer,
+                        MovieID=fakeMovie.MovieID,
+                        CustomerID=fakeCustomer.CustomerID
                     },
                     new MovieRental()
                     {
+                        RentalID=2,
                         Promotions=false,
                         Movie=fakeMovie2,
-                        Customer=fakeCustomer2
+                        Customer=fakeCustomer2,
+                        MovieID=fakeMovie2.MovieID,
+                        CustomerID=fakeCustomer2.CustomerID
+
                     }
                 }.AsQueryable()
                 );
@@ -96,6 +107,9 @@ namespace DFQXYU_HFT_2021221.Test
                 mockMovieRepository.Object, mockCustomerRepository.Object);
             movieLogic = new MovieLogic(mockMovieRepository.Object);
             customerLogic = new CustomerLogic(mockCustomerRepository.Object);
+
+            var v = movieRentalLogic.RentalsWithBefore2000();
+            ;
         }
 
         [TestCase(true, "Troy", 2004, "Wolfgang Petersen", "USA", 2000)]
@@ -191,14 +205,14 @@ namespace DFQXYU_HFT_2021221.Test
             }
         }
 
-        static Customer cc = new Customer()
-        {
-            Name = "Kiss Dániel",
-            BornDate = new DateTime(1999, 08, 11),
-            Email = "kiss.daniel@gmail.com",
-            PhoneNumber = 203334567,
-            RegularCustomer = false
-        };
+        //static Customer cc = new Customer()
+        //{
+        //    Name = "Kiss Dániel",
+        //    BornDate = new DateTime(1999, 08, 11),
+        //    Email = "kiss.daniel@gmail.com",
+        //    PhoneNumber = 203334567,
+        //    RegularCustomer = false
+        //};
 
         [TestCase(false, null)]
         public void CreateRentalNullMovieTest(bool result, Movie movie)
@@ -330,11 +344,59 @@ namespace DFQXYU_HFT_2021221.Test
         [Test]
         public void TestRentalsWithBefore2000()
         {
-            var result = movieRentalLogic.RentalsWithBefore2000().ToArray();
-            Assert.That(result[0], Is.EqualTo(new { 
-            //new Movie() { MovieID = 1},
-            }));
-        }
-    }
 
+            var result = movieRentalLogic.RentalsWithBefore2000().ToArray();
+            ;
+
+            Assert.That(result[0].GetHashCode(), Is.EqualTo(new { RentalID = 1, Name = "Troy", Year = 1999 }.GetHashCode()
+
+            ));
+        }
+
+        [Test]
+        public void TestRentalsWithNotJamesCameronAndCustomerBornDateIs2000()
+        {
+            var result = movieRentalLogic.RentalsWithNotJamesCameronAndCustomerBornDateIs2000().ToArray();
+            Assert.That(result[0].GetHashCode(), Is.EqualTo(new { CustomerName = "Kiss Dániel", RentalID = 1 }.GetHashCode()));
+        }
+
+        [Test]
+        public void TestRentalsByCustomerNames()
+        {
+            var result = movieRentalLogic.RentalsByCustomerNames().ToArray();
+            Assert.That(result[0], Is.EqualTo(new { Name = "Kiss Dániel", RentalID = 1, Movie = "Troy" }.GetHashCode()
+            ));
+            ;
+        }
+
+        [Test]
+        public void TestRentalsWithIsRegularCustomer()
+        {
+            var result = movieRentalLogic.RentalsWithIsRegularCustomer().ToArray();
+            Assert.That(result[0].GetHashCode(), Is.EqualTo(new
+            {
+                RentalID = 2,
+                CustomerName = "Nagy Géza",
+                RegularCustomer = true,
+                BornDate = new DateTime(2000, 07, 31)
+            }.GetHashCode()
+            ));
+        }
+
+        [Test]
+        public void TestRentalsWithJamesCameronMovies()
+        {
+            var result = movieRentalLogic.RentalsWithJamesCameronMovies().ToArray();
+            Assert.That(result[0].GetHashCode(), Is.EqualTo(new
+            {
+                MovieID = 2,
+                MovieTitle = "Pirates of the Caribbean",
+                Year = 2003,
+                Price = 4000,
+                RentalID = 2
+            }.GetHashCode()
+            ));
+        }
+
+    }
 }
