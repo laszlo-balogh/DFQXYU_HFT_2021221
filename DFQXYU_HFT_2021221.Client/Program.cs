@@ -1,6 +1,10 @@
 ﻿using DFQXYU_HFT_2021221.Models;
+using DFQXYU_HFT_2021221;
 using System;
 using System.Linq;
+using DFQXYU_HFT_2021221.Data;
+using DFQXYU_HFT_2021221.Repository;
+using DFQXYU_HFT_2021221.Logic;
 
 namespace DFQXYU_HFT_2021221.Client
 {
@@ -8,8 +12,15 @@ namespace DFQXYU_HFT_2021221.Client
     {
         static void Main(string[] args)
         {
-            //Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\DFQXYU_HFT_2021221_Database.mdf;Integrated Security=True
+            //Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\DFQXYU_HFT_2021221_Database.mdf;Integrated Security=True            
 
+            MovieDbContext db = new MovieDbContext();
+            
+            MovieRentalLogic log = new MovieRentalLogic(new MovieRentalRepository(db),new MovieRepository(db),new CustomerRepository(db));
+
+            var v = log.RentalsByCustomerNames();
+            var v2 = log.RentalsByCustomerNames();
+            ;
 
             RestService restService = new RestService("http://localhost:47417/");
 
