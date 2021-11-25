@@ -6,9 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace DFQXYU_HFT_2021221.Client
-{
-
-    // https://users.nik.uni-obuda.hu/kovacs.andras/hft/RestService.cs
+{   
     class RestService
     {
         HttpClient client;
