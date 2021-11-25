@@ -114,6 +114,10 @@ namespace DFQXYU_HFT_2021221.Logic
             {
                 throw new ArgumentNullException("Rental's customer cannot be null");
             }
+            else if (rental.MovieID!=rental.Movie.MovieID || rental.CustomerID!=rental.Customer.CustomerID)
+            {
+                throw new ArgumentException("IDs must match");
+            }
             this.movieRentalRepo.Create(rental);
         }
 
@@ -145,6 +149,10 @@ namespace DFQXYU_HFT_2021221.Logic
             if (rental == null)
             {
                 throw new ArgumentNullException("rental");
+            }
+            else if (rental.MovieID != rental.Movie.MovieID || rental.CustomerID != rental.Customer.CustomerID)
+            {
+                throw new ArgumentException("IDs must match");
             }
             this.movieRentalRepo.Update(rental);
         }
