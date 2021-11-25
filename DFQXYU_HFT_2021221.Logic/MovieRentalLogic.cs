@@ -51,18 +51,22 @@ namespace DFQXYU_HFT_2021221.Logic
         }
         public IEnumerable<object> RentalsByCustomerNames()
         {
-            var v1 =/*from x in movieRentalRepo.ReadAll()*/
-                    from customer in customerRepo.ReadAll()
-                    join rental in movieRentalRepo.ReadAll()
-                    on customer.CustomerID equals rental.CustomerID
-                    join movie in movieRepo.ReadAll()
-                    on rental.MovieID equals movie.MovieID
-                    select new
-                    {
-                        Name = customer.Name,
-                        RentalID = rental.RentalID,
-                        Movie = movie.MovieTitle
-                    };
+            var v1 = from x in movieRentalRepo.ReadAll()
+                         // from customer in customerRepo.ReadAll()
+                         //join rental in movieRentalRepo.ReadAll()
+                         //on customer.CustomerID equals rental.CustomerID
+                         //join movie in movieRepo.ReadAll()
+                         //on rental.MovieID equals movie.MovieID
+                     select new
+                     {
+                         //    Name = customer.Name,
+                         //    RentalID = rental.RentalID,
+                         //    Movie = movie.MovieTitle
+
+                         Name = x.Customer.Name,
+                         RentalID = x.RentalID,
+                         Movie = x.Movie.MovieTitle
+                     };
             var v2 = v1.AsEnumerable().GroupBy(x => x.Name);
             return v2.ToList();
         }
@@ -114,7 +118,7 @@ namespace DFQXYU_HFT_2021221.Logic
             {
                 throw new ArgumentNullException("Rental's customer cannot be null");
             }
-            else if (rental.MovieID!=rental.Movie.MovieID || rental.CustomerID!=rental.Customer.CustomerID)
+            else if (rental.MovieID != rental.Movie.MovieID || rental.CustomerID != rental.Customer.CustomerID)
             {
                 throw new ArgumentException("IDs must match");
             }
