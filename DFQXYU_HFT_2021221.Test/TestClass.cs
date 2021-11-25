@@ -213,6 +213,79 @@ namespace DFQXYU_HFT_2021221.Test
         //    PhoneNumber = 203334567,
         //    RegularCustomer = false
         //};
+        [TestCase(true, 1, 1, 1, 1)]
+        [TestCase(false, 1, 2, 1, 1)]
+        [TestCase(false, 1, 1, 1, 2)]
+        [TestCase(false, 2, 1, 1, 1)]
+        [TestCase(false, 1, 1, 2, 1)]
+        public void CreateRentalTest(bool result, int movieID, int customerID, int rMovieID, int rCustomerID)
+        {
+            if (result)
+            {
+                Assert.That(
+                    () =>
+                    {
+                        movieRentalLogic.Create(
+                            new MovieRental()
+                            {
+                                Movie = new Movie()
+                                {
+                                    MovieID = movieID,
+                                    MovieTitle = "Troy",
+                                    Year = 2004,
+                                    Producer = "Wolfgang Petersen",
+                                    Location = "USA",
+                                    Price = 2000
+                                },
+                                Customer = new Customer()
+                                {
+                                    CustomerID = customerID,
+                                    Name = "Kiss Dániel",
+                                    BornDate = new DateTime(1999, 08, 11),
+                                    Email = "kiss.daniel@gmail.com",
+                                    PhoneNumber = 203334567,
+                                    RegularCustomer = false
+                                },
+                                MovieID = rMovieID,
+                                CustomerID = rCustomerID
+                            });
+                    }, Throws.Nothing
+                    );
+
+            }
+            else
+            {
+                Assert.That(
+                    () =>
+                    {
+                        movieRentalLogic.Create(
+                            new MovieRental()
+                            {
+                                Movie = new Movie()
+                                {
+                                    MovieID = movieID,
+                                    MovieTitle = "Troy",
+                                    Year = 2004,
+                                    Producer = "Wolfgang Petersen",
+                                    Location = "USA",
+                                    Price = 2000
+                                },
+                                Customer = new Customer()
+                                {
+                                    CustomerID = customerID,
+                                    Name = "Kiss Dániel",
+                                    BornDate = new DateTime(1999, 08, 11),
+                                    Email = "kiss.daniel@gmail.com",
+                                    PhoneNumber = 203334567,
+                                    RegularCustomer = false
+                                },
+                                MovieID = rMovieID,
+                                CustomerID = rCustomerID
+                            });
+                    }, Throws.Exception
+                    );
+            }
+        }
 
         [TestCase(false, null)]
         public void CreateRentalNullMovieTest(bool result, Movie movie)
