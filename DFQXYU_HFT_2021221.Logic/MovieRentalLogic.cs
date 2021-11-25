@@ -26,7 +26,7 @@ namespace DFQXYU_HFT_2021221.Logic
                      join movie in movieRepo.ReadAll()
                      on x.MovieID equals movie.MovieID
                      where movie.Year < 2000
-                     select new
+                     select new /*RentalsWithBefore2000Class()*/
                      {
                          RentalID = x.RentalID,
                          Name = movie.MovieTitle,
@@ -106,11 +106,11 @@ namespace DFQXYU_HFT_2021221.Logic
             {
                 throw new ArgumentNullException("rental");
             }
-            else if(rental.Movie==null)
+            else if (rental.Movie == null)
             {
                 throw new ArgumentNullException("Rental's movie cannot be null");
             }
-            else if (rental.Customer==null)
+            else if (rental.Customer == null)
             {
                 throw new ArgumentNullException("Rental's customer cannot be null");
             }
@@ -148,5 +148,16 @@ namespace DFQXYU_HFT_2021221.Logic
             }
             this.movieRentalRepo.Update(rental);
         }
+    }
+    public class RentalsWithBefore2000Class
+    {
+        public int RentalID { get; set; }
+        public string Name { get; set; }
+        public int Year { get; set; }
+        //public RentalsWithBefore2000Class(int rentalId,string name,int year)
+        //{
+        //    this.RentalID
+        //}
+
     }
 }
