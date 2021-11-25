@@ -29,6 +29,8 @@ namespace DFQXYU_HFT_2021221.Models
         {
             this.StartDate = DateTime.Now;
             this.EndDate = this.StartDate.AddDays(30);
+            //    this.CustomerID = Customer.CustomerID;
+            //    this.MovieID = Movie.MovieID;
         }
     }
 }
