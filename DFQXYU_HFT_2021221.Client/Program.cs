@@ -27,7 +27,7 @@ namespace DFQXYU_HFT_2021221.Client
 
             //    }
             //}
-           var v4= v2[1].ToString();
+           //var v4= v2[1].ToString();
 
             ;
 
