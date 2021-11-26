@@ -15,11 +15,12 @@ namespace DFQXYU_HFT_2021221.Client
             //Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\DFQXYU_HFT_2021221_Database.mdf;Integrated Security=True            
 
             MovieDbContext db = new MovieDbContext();
-            
-            MovieRentalLogic log = new MovieRentalLogic(new MovieRentalRepository(db),new MovieRepository(db),new CustomerRepository(db));
 
-            var v = log.RentalsByCustomerNames();
-            var v2 = log.RentalsByCustomerNames().ToArray();
+            MovieRentalLogic log = new MovieRentalLogic(new MovieRentalRepository(db), new MovieRepository(db), new CustomerRepository(db));
+
+           
+            
+            //var v2 = log.RentalsByCustomerNames().ToArray();
             //foreach (var item in v2)
             //{
             //    foreach (var sas in item)
@@ -27,7 +28,7 @@ namespace DFQXYU_HFT_2021221.Client
 
             //    }
             //}
-           //var v4= v2[1].ToString();
+            //var v4= v2[1].ToString();
 
             ;
 
@@ -37,6 +38,9 @@ namespace DFQXYU_HFT_2021221.Client
             var customers = restService.Get<Customer>("customers");
             var rentals = restService.Get<MovieRental>("rentals");
 
+            var v = log.RentalsByCustomerNames();
+
+            ;
             //var movie = restService.Get<>
 
 
