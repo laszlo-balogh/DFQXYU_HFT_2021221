@@ -108,7 +108,8 @@ namespace DFQXYU_HFT_2021221.Test
             movieLogic = new MovieLogic(mockMovieRepository.Object);
             customerLogic = new CustomerLogic(mockCustomerRepository.Object);
 
-            var v = movieRentalLogic.RentalsWithBefore2000();
+            var v = movieRentalLogic.Read(1);
+            var v2 = movieRentalLogic.ReadAll();
             ;
         }
 
@@ -471,5 +472,13 @@ namespace DFQXYU_HFT_2021221.Test
             ));
         }
 
+        [TestCase(1)]
+        public void DeleteTest(int id)
+        {
+            var m = movieRentalLogic.Read(id);
+            Assert.That( movieLogic.Read(id)!=null);
+            movieLogic.Delete(id);
+            Assert.That(movieLogic.Read(id) != null);
+        }
     }
 }

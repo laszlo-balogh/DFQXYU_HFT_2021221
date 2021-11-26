@@ -18,7 +18,7 @@ namespace DFQXYU_HFT_2021221.Client
 
             MovieRentalLogic log = new MovieRentalLogic(new MovieRentalRepository(db), new MovieRepository(db), new CustomerRepository(db));
 
-           
+            
             
             //var v2 = log.RentalsByCustomerNames().ToArray();
             //foreach (var item in v2)
