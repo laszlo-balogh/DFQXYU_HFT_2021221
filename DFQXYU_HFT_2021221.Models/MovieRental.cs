@@ -18,15 +18,16 @@ namespace DFQXYU_HFT_2021221.Models
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
         public bool Promotions { get; set; }
+        [JsonIgnore]
         [NotMapped]
         public virtual Movie Movie { get; set; }
-        [ForeignKey(nameof(Movie))]
-        [JsonIgnore]
+        [ForeignKey(nameof(Models.Movie))]
+
         public int MovieID { get; set; }
+        [JsonIgnore]
         [NotMapped]
         public virtual Customer Customer { get; set; }
-        [ForeignKey(nameof(Customer))]
-        [JsonIgnore]
+        [ForeignKey(nameof(Models.Customer))]
         public int CustomerID { get; set; }
         public MovieRental()
         {
