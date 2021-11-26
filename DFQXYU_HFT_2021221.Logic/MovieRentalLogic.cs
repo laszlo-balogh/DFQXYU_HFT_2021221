@@ -21,31 +21,32 @@ namespace DFQXYU_HFT_2021221.Logic
             this.customerRepo = customerRepo;
         }
         public IEnumerable<object> RentalsWithBefore2000()
-        {
+        {            
             var v1 = from x in movieRentalRepo.ReadAll()
-                     join movie in movieRepo.ReadAll()
-                     on x.MovieID equals movie.MovieID
-                     where movie.Year < 2000
+                     //join movie in movieRepo.ReadAll()
+                     //on x.MovieID equals movie.MovieID
+                     where x.Movie.Year < 2000
                      select new /*RentalsWithBefore2000Class()*/
                      {
                          RentalID = x.RentalID,
-                         Name = movie.MovieTitle,
-                         Year = movie.Year
+                         Name = x.Movie.MovieTitle,
+                         Year = x.Movie.Year
                      };
             return v1.ToList();
         }
         public IEnumerable<object> RentalsWithNotJamesCameronAndCustomerBornDateIs2000()
         {
-            var v1 = from movie in movieRepo.ReadAll()
-                     join rental in movieRentalRepo.ReadAll()
-                     on movie.MovieID equals rental.MovieID
-                     join customer in customerRepo.ReadAll()
-                     on rental.CustomerID equals customer.CustomerID
-                     where !movie.Producer.Contains("James Cameron") && customer.BornDate.Year == 2000
+            var v1 = from x in movieRentalRepo.ReadAll()
+          //         from movie in movieRepo.ReadAll()  
+          //         join rental in movieRentalRepo.ReadAll()
+          //         on movie.MovieID equals rental.MovieID
+          //         join customer in customerRepo.ReadAll()
+          //         on rental.CustomerID equals customer.CustomerID
+                     where !x.Movie.Producer.Contains("James Cameron") && x.Customer.BornDate.Year == 2000
                      select new
                      {
-                         CustomerName = customer.Name,
-                         RentalID = rental.RentalID
+                         CustomerName = x.Customer.Name,
+                         RentalID = x.RentalID
                      };
             return v1.ToList();
         }
@@ -73,15 +74,15 @@ namespace DFQXYU_HFT_2021221.Logic
         public IEnumerable<object> RentalsWithIsRegularCustomer()
         {
             var v1 = from x in movieRentalRepo.ReadAll()
-                     join customer in customerRepo.ReadAll()
-                     on x.CustomerID equals customer.CustomerID
-                     where customer.RegularCustomer == true
+                         //join customer in customerRepo.ReadAll()
+                         //on x.CustomerID equals customer.CustomerID
+                     where x.Customer.RegularCustomer == true
                      select new
                      {
                          RentalID = x.RentalID,
-                         CustomerName = customer.Name,
-                         RegularCustomer = customer.RegularCustomer,
-                         BornDate = customer.BornDate
+                         CustomerName = x.Customer.Name,
+                         RegularCustomer = x.Customer.RegularCustomer,
+                         BornDate = x.Customer.BornDate
                      };
             var v2 = v1.AsEnumerable().GroupBy(x => x.CustomerName);
             return v2.ToList();
@@ -90,15 +91,15 @@ namespace DFQXYU_HFT_2021221.Logic
         public IEnumerable<object> RentalsWithJamesCameronMovies()
         {
             var v1 = from x in movieRentalRepo.ReadAll()
-                     join movie in movieRepo.ReadAll()
-                     on x.MovieID equals movie.MovieID
-                     where movie.Producer.Contains("James Cameron")
+                         //join movie in movieRepo.ReadAll()
+                         //on x.MovieID equals movie.MovieID
+                     where x.Movie.Producer.Contains("James Cameron")
                      select new
                      {
-                         MovieID = movie.MovieID,
-                         MovieTitle = movie.MovieTitle,
-                         Year = movie.Year,
-                         Price = movie.Price,
+                         MovieID = x.Movie.MovieID,
+                         MovieTitle = x.Movie.MovieTitle,
+                         Year = x.Movie.Year,
+                         Price = x.Movie.Price,
                          RentalID = x.RentalID
                      };
             return v1.ToList();
