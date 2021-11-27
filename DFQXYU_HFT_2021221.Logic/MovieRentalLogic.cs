@@ -161,16 +161,33 @@ namespace DFQXYU_HFT_2021221.Logic
             }
             this.movieRentalRepo.Update(rental);
         }
-    }
-    public class RentalsWithBefore2000Class
-    {
-        public int RentalID { get; set; }
-        public string Name { get; set; }
-        public int Year { get; set; }
-        //public RentalsWithBefore2000Class(int rentalId,string name,int year)
-        //{
-        //    this.RentalID
-        //}
 
+        public IEnumerable<object> RentalsByLaci()
+        {
+            var v1 = from x in movieRentalRepo.ReadAll()
+                     where x.Customer.Name.ToUpper().Contains("LACI")
+                     select new
+                     {
+                         RentalID = x.RentalID,
+                         Name = x.Customer.Name,
+                         Movie = x.Movie.MovieTitle
+                     };
+            return v1.ToList();
+        }
+
+        public IEnumerable<object> RentalsCustomerBefore2000()
+        {
+            var v1 = from x in movieRentalRepo.ReadAll()
+                           where x.Customer.BornDate.Year < 2000
+                           select new
+                           {
+                               RentalID = x.RentalID,
+                               Name = x.Customer.Name,
+                               BornDate=x.Customer.BornDate,
+                               Movie = x.Movie.MovieTitle
+                           };
+            return v1.ToList();
+        }
     }
+    
 }

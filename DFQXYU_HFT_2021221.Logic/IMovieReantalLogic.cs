@@ -20,5 +20,7 @@ namespace DFQXYU_HFT_2021221.Logic
         IEnumerable<object> RentalsWithNotJamesCameronAndCustomerBornDateIs2000();
         IEnumerable<object> RentalsWithJamesCameronMovies();
         IEnumerable<object> RentalsByCustomerNames();
+        IEnumerable<object> RentalsByLaci();
+        IEnumerable<object> RentalsCustomerBefore2000();
     }
 }
