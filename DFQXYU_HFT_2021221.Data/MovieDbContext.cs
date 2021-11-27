@@ -36,13 +36,11 @@ namespace DFQXYU_HFT_2021221.Data
             modelBuilder.Entity<Movie>(entity =>
             {
                 entity
-                .HasMany/*<MovieRental>*/(m => m.Rentals)
+                .HasMany(m => m.Rentals)
                 .WithOne(r => r.Movie)
                 .HasForeignKey(m => m.MovieID)
                 .OnDelete(DeleteBehavior.ClientSetNull);
 
-                //entity.Ignore(m => m.Rentals)
-                //.UsePropertyAccessMode(PropertyAccessMode.Property);
             });
 
 
@@ -54,28 +52,24 @@ namespace DFQXYU_HFT_2021221.Data
                 .HasForeignKey(c => c.CustomerID)
                 .OnDelete(DeleteBehavior.ClientSetNull);
 
-                //entity.Ignore(c => c.Rentals)
-                //.UsePropertyAccessMode(PropertyAccessMode.Property);
             });
 
             modelBuilder.Entity<MovieRental>(entity =>
             {
                 entity
-                .HasOne/*<Movie>*/(r => r.Movie)
+                .HasOne(r => r.Movie)
                 .WithMany(m => m.Rentals)
                 .HasForeignKey(r => r.MovieID)
                 .OnDelete(DeleteBehavior.ClientSetNull);
 
-                //entity.Navigation(r => r.Movie)
-                //.UsePropertyAccessMode(PropertyAccessMode.Property);
+               
 
-                entity.HasOne/*<Customer>*/(r => r.Customer)
+                entity.HasOne(r => r.Customer)
                .WithMany(c => c.Rentals)
                .HasForeignKey(r => r.CustomerID)
                .OnDelete(DeleteBehavior.ClientSetNull);
 
-                //entity.Ignore(r => r.Customer)
-                //.UsePropertyAccessMode(PropertyAccessMode.Property);
+                
             });
 
             Movie m1 = new Movie() { MovieID = 1, MovieTitle = "Jurassic Park", Year = 1993, Producer = "Steven Spielberg", Location = "USA", Price = 2000 };
@@ -106,54 +100,7 @@ namespace DFQXYU_HFT_2021221.Data
 
             modelBuilder.Entity<Movie>().HasData(m1, m2, m3, m4, m5, m6, m7, m8, m9);
             modelBuilder.Entity<Customer>().HasData(c1, c2, c3, c4);
-            modelBuilder.Entity<MovieRental>().HasData(r1, r2, r3, r4, r5, r6, r7, r8, r9);
-
-            //r1.MovieID = m1.MovieID;
-            //r2.MovieID = m2.MovieID;
-            //r3.MovieID = m3.MovieID;
-            //r4.MovieID = m4.MovieID;
-            //r5.MovieID = m5.MovieID;
-            //r6.MovieID = m6.MovieID;
-            //r7.MovieID = m7.MovieID;
-            //r8.MovieID = m8.MovieID;
-            //r9.MovieID = m9.MovieID;
-
-            //r1.CustomerID = c1.CustomerID;
-            //r2.CustomerID = c2.CustomerID;
-            //r3.CustomerID = c3.CustomerID;
-            //r4.CustomerID = c4.CustomerID;
-            //r5.CustomerID = c4.CustomerID;
-            //r6.CustomerID = c1.CustomerID;
-            //r7.CustomerID = c3.CustomerID;
-            //r8.CustomerID = c2.CustomerID;
-            //r9.CustomerID = c3.CustomerID;
-
-
-
-            //m1.Rentals.Add(r1);
-            //m2.Rentals.Add(r2);
-            //m3.Rentals.Add(r3);
-            //m4.Rentals.Add(r4);
-            //m5.Rentals.Add(r5);
-            //m6.Rentals.Add(r6);
-            //m7.Rentals.Add(r7);
-            //m8.Rentals.Add(r8);
-            //m9.Rentals.Add(r9);
-
-            //c1.Rentals.Add(r1);
-            //c2.Rentals.Add(r2);
-            //c3.Rentals.Add(r3);
-            //c4.Rentals.Add(r4);
-            //c4.Rentals.Add(r5);
-            //c1.Rentals.Add(r6);
-            //c3.Rentals.Add(r7);
-            //c2.Rentals.Add(r8);
-            //c3.Rentals.Add(r9);
-
-
-
-
-
+            modelBuilder.Entity<MovieRental>().HasData(r1, r2, r3, r4, r5, r6, r7, r8, r9);            
         }
     }
 }
