@@ -45,7 +45,7 @@ namespace DFQXYU_HFT_2021221.Test
             Customer fakeCustomer = new Customer()
             {
                 CustomerID = 1,
-                Name = "Kiss Dániel",
+                Name = "Kiss Laci",
                 BornDate = new DateTime(2000, 08, 11),
                 Email = "kiss.daniel@gmail.com",
                 PhoneNumber = 203334567,
@@ -55,7 +55,7 @@ namespace DFQXYU_HFT_2021221.Test
             {
                 CustomerID = 2,
                 Name = "Nagy Géza",
-                BornDate = new DateTime(2000, 07, 31),
+                BornDate = new DateTime(1999, 07, 31),
                 Email = "nagy.geza@gmail.com",
                 PhoneNumber = 203334568,
                 RegularCustomer = true
@@ -431,28 +431,55 @@ namespace DFQXYU_HFT_2021221.Test
         public void TestRentalsWithNotJamesCameronAndCustomerBornDateIs2000()
         {
             var result = movieRentalLogic.RentalsWithNotJamesCameronAndCustomerBornDateIs2000().ToArray();
-            Assert.That(result[0].GetHashCode(), Is.EqualTo(new { CustomerName = "Kiss Dániel", RentalID = 1 }.GetHashCode()));
+            Assert.That(result[0].GetHashCode(), Is.EqualTo(new { CustomerName = "Kiss Laci", RentalID = 1 }.GetHashCode()));
         }
 
         [Test]
         public void TestRentalsByCustomerNames()
         {
             var result = movieRentalLogic.RentalsByCustomerNames().ToArray();
-            Assert.That(result[0], Is.EqualTo(new { Name = "Kiss Dániel", RentalID = 1, Movie = "Troy" }.GetHashCode()
-            ));
-            ;
+            Assert.That(result[0].GetHashCode(),Is.EqualTo(
+                            new List<object> { new { Name = "Kiss Laci", RentalID = 1, Movie = "Troy" } }.ToArray().GetHashCode()
+                        ));
         }
 
         [Test]
         public void TestRentalsWithIsRegularCustomer()
         {
             var result = movieRentalLogic.RentalsWithIsRegularCustomer().ToArray();
-            Assert.That(result[0].GetHashCode(), Is.EqualTo(new
+            Assert.That(result[0], Is.EqualTo(new List<object> { new
             {
                 RentalID = 2,
                 CustomerName = "Nagy Géza",
                 RegularCustomer = true,
                 BornDate = new DateTime(2000, 07, 31)
+            }}
+            ));
+        }
+        [Test]
+        public void TestRentalsByLaci()
+        {
+            var result = movieRentalLogic.RentalsByLaci().ToArray();
+            Assert.That(result[0].GetHashCode(), Is.EqualTo(new
+            {
+                RentalID = 1,
+                Name = "Kiss Laci",
+                Movie = "Troy"
+            }.GetHashCode()
+            ));
+        }
+
+
+        [Test]
+        public void TestRentalsCustomerBefore2000()
+        {
+            var result = movieRentalLogic.RentalsCustomerBefore2000().ToArray();
+            Assert.That(result[0].GetHashCode, Is.EqualTo(new
+            {
+                RentalID = 2,
+                Name = "Nagy Géza",
+                BornDate = new DateTime(1999, 07, 31),
+                Movie = "Pirates of the Caribbean"
             }.GetHashCode()
             ));
         }
@@ -476,7 +503,7 @@ namespace DFQXYU_HFT_2021221.Test
         public void DeleteTest(int id)
         {
             var m = movieRentalLogic.Read(id);
-            Assert.That( movieLogic.Read(id)!=null);
+            Assert.That(movieLogic.Read(id) != null);
             movieLogic.Delete(id);
             Assert.That(movieLogic.Read(id) != null);
         }
