@@ -39,6 +39,7 @@ namespace DFQXYU_HFT_2021221.Client
             var rentals = restService.Get<MovieRental>("rentals");
 
             var v = log.RentalsByCustomerNames();
+            var v1 =log.RentalsWithIsRegularCustomer();
 
             ;
             //var movie = restService.Get<>
