@@ -73,7 +73,7 @@ namespace DFQXYU_HFT_2021221.Client
             HttpResponseMessage response =
                 client.PostAsJsonAsync(endpoint, item).GetAwaiter().GetResult();
 
-            response.EnsureSuccessStatusCode();
+            response.EnsureSuccessStatusCode(); response.EnsureSuccessStatusCode();
         }
 
         public void Delete(int id, string endpoint)
@@ -88,7 +88,7 @@ namespace DFQXYU_HFT_2021221.Client
         {
             HttpResponseMessage response =
                 client.PutAsJsonAsync(endpoint, item).GetAwaiter().GetResult();
-
+            ;
 
             response.EnsureSuccessStatusCode();
         }
