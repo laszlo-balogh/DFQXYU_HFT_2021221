@@ -97,6 +97,10 @@ namespace DFQXYU_HFT_2021221.Logic
             {
                 throw new ArgumentException("Name cannot be null");
             }
+            else if (customer.Name.Length < 2)
+            {
+                throw new ArgumentException("Not valid name");
+            }
             else if (customer.BornDate == default)
             {
                 throw new ArgumentException("Born date cnnot be empty");
@@ -105,7 +109,7 @@ namespace DFQXYU_HFT_2021221.Logic
             {
                 throw new ArgumentException("Email cannot be null");
             }
-            else if (customer.Email.Contains('@'))
+            if (customer.Email.Contains('@'))
             {
                 string[] array = customer.Email.Split('@');
                 if (array.Length > 2)
@@ -117,13 +121,21 @@ namespace DFQXYU_HFT_2021221.Logic
                     throw new ArgumentException("Wrong email format");
                 }
             }
-            else if (customer.PhoneNumber.ToString().Length < 9 || customer.PhoneNumber.ToString().Length > 9)
+            else
+            {
+                throw new ArgumentException("Wrong email format");
+            }
+            if (customer.PhoneNumber.ToString().Length < 9 || customer.PhoneNumber.ToString().Length > 9)
             {
                 throw new ArgumentException("Wrong phone number format");
             }
             else if (customer.PhoneNumber < 0)
             {
                 throw new ArgumentException("Wrong phone number format");
+            }
+            else if (Read(customer.CustomerID) == null)
+            {
+                throw new ArgumentException("ID not found");
             }
             this.customerRepo.Update(customer);
         }

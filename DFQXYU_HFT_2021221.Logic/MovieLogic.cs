@@ -84,6 +84,10 @@ namespace DFQXYU_HFT_2021221.Logic
             {
                 throw new ArgumentException("Price input is not allowed");
             }
+            else if (Read(movie.MovieID) == null)
+            {
+                throw new ArgumentException("ID not found");
+            }
             this.movieRepo.Update(movie);
         }
     }

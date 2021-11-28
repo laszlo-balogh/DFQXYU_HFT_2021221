@@ -159,6 +159,10 @@ namespace DFQXYU_HFT_2021221.Logic
             {
                 throw new ArgumentException("IDs must match");
             }
+            else if (Read(rental.RentalID) == null)
+            {
+                throw new ArgumentException("ID not found");
+            }
             this.movieRentalRepo.Update(rental);
         }
 
