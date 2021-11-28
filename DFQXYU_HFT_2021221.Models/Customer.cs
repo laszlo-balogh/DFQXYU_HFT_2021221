@@ -33,5 +33,12 @@ namespace DFQXYU_HFT_2021221.Models
             this.RegularCustomer = false;
         }
 
+        public override string ToString()
+        {
+            string s = $"CustomerID = {CustomerID} - Name = {Name} - BornDate = {BornDate}" +
+                $"- Email = {Email} - PhoneNumber = {PhoneNumber} - RegularCustomer = {RegularCustomer}";
+            return s;
+        }
+
     }
 }

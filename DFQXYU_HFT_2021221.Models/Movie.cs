@@ -29,5 +29,11 @@ namespace DFQXYU_HFT_2021221.Models
         {
             this.Rentals = new HashSet<MovieRental>();
         }
+        public override string ToString()
+        {
+            string s = $"MovieID = {MovieID} - MovieTitle = {MovieTitle} - Year = {Year}" +
+                $"- Producer = {Producer} - Location = {Location} - Price = {Price}";
+            return s;
+        }
     }
 }

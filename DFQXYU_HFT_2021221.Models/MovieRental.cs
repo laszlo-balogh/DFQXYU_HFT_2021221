@@ -36,5 +36,12 @@ namespace DFQXYU_HFT_2021221.Models
             //    this.CustomerID = Customer.CustomerID;
             //    this.MovieID = Movie.MovieID;
         }
+
+        public override string ToString()
+        {
+            string s = $"RentalID = {RentalID} - StartDate = {StartDate} - EndDate = {EndDate}" +
+                $"- Prmotions = {Promotions} - MovieID = {MovieID} - CustomerID = {CustomerID}";
+            return s;
+        }
     }
 }
