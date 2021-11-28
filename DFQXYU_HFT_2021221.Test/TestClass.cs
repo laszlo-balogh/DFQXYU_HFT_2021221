@@ -99,6 +99,8 @@ namespace DFQXYU_HFT_2021221.Test
             ).Returns(
                 new List<Movie>() { fakeMovie, fakeMovie2 }.AsQueryable()
                 );
+            mockMovieRepository.Setup(t => t.Read(1)).Returns(fakeMovie);
+            mockCustomerRepository.Setup(t => t.Read(1)).Returns(fakeCustomer);
             mockCustomerRepository.Setup(t => t.ReadAll()
             ).Returns(
                 new List<Customer>() { fakeCustomer, fakeCustomer2 }.AsQueryable()
@@ -110,7 +112,8 @@ namespace DFQXYU_HFT_2021221.Test
 
             var v = movieRentalLogic.Read(1);
             var v2 = movieRentalLogic.ReadAll();
-            ;
+            var vv = movieLogic.ReadAll();
+            var vv2 = movieLogic.Read(1);            
         }
 
         [TestCase(true, "Troy", 2004, "Wolfgang Petersen", "USA", 2000)]
@@ -206,14 +209,6 @@ namespace DFQXYU_HFT_2021221.Test
             }
         }
 
-        //static Customer cc = new Customer()
-        //{
-        //    Name = "Kiss Dániel",
-        //    BornDate = new DateTime(1999, 08, 11),
-        //    Email = "kiss.daniel@gmail.com",
-        //    PhoneNumber = 203334567,
-        //    RegularCustomer = false
-        //};
         [TestCase(true, 1, 1, 1, 1)]
         [TestCase(false, 1, 2, 1, 1)]
         [TestCase(false, 1, 1, 1, 2)]
@@ -432,30 +427,8 @@ namespace DFQXYU_HFT_2021221.Test
         {
             var result = movieRentalLogic.RentalsWithNotJamesCameronAndCustomerBornDateIs2000().ToArray();
             Assert.That(result[0].GetHashCode(), Is.EqualTo(new { CustomerName = "Kiss Laci", RentalID = 1 }.GetHashCode()));
-        }
-
-        [Test]
-        public void TestRentalsByCustomerNames()
-        {
-            var result = movieRentalLogic.RentalsByCustomerNames().ToArray();
-            Assert.That(result[0].GetHashCode(),Is.EqualTo(
-                            new List<object> { new { Name = "Kiss Laci", RentalID = 1, Movie = "Troy" } }.ToArray().GetHashCode()
-                        ));
-        }
-
-        [Test]
-        public void TestRentalsWithIsRegularCustomer()
-        {
-            var result = movieRentalLogic.RentalsWithIsRegularCustomer().ToArray();
-            Assert.That(result[0], Is.EqualTo(new List<object> { new
-            {
-                RentalID = 2,
-                CustomerName = "Nagy Géza",
-                RegularCustomer = true,
-                BornDate = new DateTime(2000, 07, 31)
-            }}
-            ));
-        }
+        }            
+       
         [Test]
         public void TestRentalsByLaci()
         {
@@ -499,13 +472,102 @@ namespace DFQXYU_HFT_2021221.Test
             ));
         }
 
-        [TestCase(1)]
-        public void DeleteTest(int id)
+        [TestCase(true, 1,"Troy", 2004, "Wolfgang Petersen", "USA", 2000)]
+        [TestCase(true, 1, "D", 2004, "Wolfgang Petersen", "USA", null)]
+        [TestCase(false, 1, null, 2004, "Wolfgang Petersen", "USA", 2000)]
+        [TestCase(false, 1, "A", -2004, "Wolfgang Petersen", "USA", 2000)]
+        [TestCase(false, 1, "B", 20040, "Wolfgang Petersen", "USA", 2000)]
+        [TestCase(false, 1, "C", 2004, "Wolfgang Petersen", "USA", -2000)]
+        [TestCase(false, 1, "E", 2004, "Wolfgang Petersen", "USA", -200)]
+        [TestCase(false, 100, "E", 2004, "Wolfgang Petersen", "USA", 2000)]
+        public void UpdateMovieTest(bool result, int id, string movieTitle, int year, string producer, string location, int price)
         {
-            var m = movieRentalLogic.Read(id);
-            Assert.That(movieLogic.Read(id) != null);
-            movieLogic.Delete(id);
-            Assert.That(movieLogic.Read(id) != null);
+            if (result)
+            {
+                Assert.That(
+                    () =>
+                    {
+                        movieLogic.Update(
+                            new Movie()
+                            {
+                                MovieID = id,
+                                MovieTitle = movieTitle,
+                                Year = year,
+                                Producer = producer,
+                                Location = location,
+                                Price = price
+                            });
+                    }, Throws.Nothing
+                    );
+            }
+            else
+            {
+                Assert.That(
+                    () =>
+                    {
+                        movieLogic.Update(
+                            new Movie()
+                            {
+                                MovieID = id,
+                                MovieTitle = movieTitle,
+                                Year = year,
+                                Producer = producer,
+                                Location = location,
+                                Price = price
+                            });
+                    }, Throws.Exception
+                    );
+            }
+        }
+       
+        [TestCase(true,1, "1Kiss Béla", "2000-11-22", "xyz@gmail.com", 203334567, false)]
+        [TestCase(false, 1, "", "2000-11-22", "xyz@gmail.com", 203334567, false)]
+        [TestCase(false, 1, null, "2000-11-22", "xyz@gmail.com", 203334567, false)]
+        [TestCase(false, 1, "2Kiss Béla", default, "xyz@gmail.com", 203334567, false)]
+        [TestCase(false, 1, "3Kiss Béla", "2000-11-11", "xyzgmail.com", 203334567, false)]
+        [TestCase(false, 1, "4Kiss Béla", "2000-11-11", "xyz@gmailcom", 203334567, false)]
+        [TestCase(false, 1, "5Kiss Béla", "2000-11-11", "xyz@gmail.com", -13334567, false)]
+        [TestCase(false, 1, "6Kiss Béla", "2000-11-11", "xyz@gmail.com", 13334567, false)]
+        [TestCase(false, 1, "7Kiss Béla", "2000-11-11", "xyz@gmail.com", null, false)]
+        [TestCase(false, 100, "8Kiss Béla", "2000-11-22", "xyz@gmail.com", 203334567, false)]
+        public void UpdateCustomerTest(bool result,int id , string name, DateTime bornDate, string email, int phoneNumber, bool regularCustomer)
+        {
+            if (result)
+            {
+                Assert.That(
+                    () =>
+                    {
+                        customerLogic.Update(
+                            new Customer()
+                            {
+                                CustomerID =id,
+                                Name = name,
+                                BornDate = bornDate,
+                                Email = email,
+                                PhoneNumber = phoneNumber,
+                                RegularCustomer = regularCustomer
+                            });
+                    }, Throws.Nothing
+                    );
+            }
+            else
+            {
+                Assert.That(
+                    () =>
+                    {
+                        customerLogic.Update(
+                            new Customer()
+                            {
+                                CustomerID = id,
+                                Name = name,
+                                BornDate = bornDate,
+                                Email = email,
+                                PhoneNumber = phoneNumber,
+                                RegularCustomer = regularCustomer
+                            });
+                    }, Throws.Exception
+                    );
+            }
         }
     }
 }
