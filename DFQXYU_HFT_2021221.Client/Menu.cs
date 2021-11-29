@@ -17,6 +17,8 @@ namespace DFQXYU_HFT_2021221.Client
         Customer cCreate;
         MovieRental rUpdate;
         MovieRental rCreate;
+        Movie rMovieCreate;
+        Customer rCustomerCreate;
 
         public Menu(RestService restService)
         {
@@ -27,6 +29,8 @@ namespace DFQXYU_HFT_2021221.Client
             cCreate = new Customer();
             rUpdate = new MovieRental();
             rCreate = new MovieRental();
+            rMovieCreate = new Movie();
+            rCustomerCreate = new Customer();
 
         }
 
@@ -73,8 +77,7 @@ namespace DFQXYU_HFT_2021221.Client
                     .Add("Back", ConsoleMenu.Close).Show())
                 .Add("Back", ConsoleMenu.Close).Show())
                 .Add("Create ...", () => new ConsoleMenu()
-                .Add("Movie", () => new ConsoleMenu()
-                    .Add("ID", () => CreateItemM("ID"))
+                .Add("Movie", () => new ConsoleMenu()                    
                     .Add("Title", () => CreateItemM("Title"))
                     .Add("Year", () => CreateItemM("Year"))
                     .Add("Producer", () => CreateItemM("Producer"))
@@ -83,7 +86,6 @@ namespace DFQXYU_HFT_2021221.Client
                     .Add("Create", () => CreateItemM("Create"))
                     .Add("Back", ConsoleMenu.Close).Show())
                 .Add("Customer", () => new ConsoleMenu()
-                    .Add("ID", () => CreateItemC("ID"))
                     .Add("Name", () => CreateItemC("Name"))
                     .Add("BornDate", () => CreateItemC("BornDate"))
                     .Add("Email", () => CreateItemC("Email"))
@@ -91,15 +93,14 @@ namespace DFQXYU_HFT_2021221.Client
                     .Add("RegularCustomer", () => CreateItemC("RegularCustomer"))
                     .Add("Create", () => CreateItemC("Create"))
                     .Add("Back", ConsoleMenu.Close).Show())
-                .Add("Rental", () => new ConsoleMenu()
-                    .Add("ID", () => CreateItemR("ID"))
+                .Add("Rental", () => new ConsoleMenu()                
                     .Add("StartDate", () => CreateItemR("StartDate"))
                     .Add("EndDate", () => CreateItemR("EndDate"))
-                    .Add("MovieID", () => CreateItemR("MovieID"))
-                    .Add("CustomerID", () => CreateItemR("CustomerID"))
+                    .Add("MovieID", () => CreateItemR("MovieID"))                  
+                    .Add("CustomerID", () => CreateItemR("CustomerID"))                   
                     .Add("Promotions", () => CreateItemR("Promotions"))
                     .Add("Create", () => CreateItemR("Create"))
-                    .Add("Back", ConsoleMenu.Close).Show())
+                    .Add("Back", ConsoleMenu.Close).Show())                 
                 .Add("Back", ConsoleMenu.Close).Show())
                 .Add("Delete ...", () => new ConsoleMenu()
                  .Add("Movie", () => DeleteItem("movie"))
@@ -115,20 +116,10 @@ namespace DFQXYU_HFT_2021221.Client
                 .Add("RentalsByLaci", ()=>NonCrud("RentalsByLaci"))
                 .Add("RentalsCustomerBefore2000", ()=>NonCrud("RentalsCustomerBefore2000"))
                 .Add("Back",ConsoleMenu.Close).Show())
-              .Add("Exit", ConsoleMenu.Close);
-
-
-            //.Add("DELETE ...", () => new ConsoleMenu()
-            //  .Add("Delete Customer", () => MenuMethods.DeleteCustomer(customerLogic))
-            //  .Add("Delete Order", () => MenuMethods.DeleteOrder(shopLogic))
-            //  .Add("Delete Equipment", () => MenuMethods.DeleteEquipment(shopLogic))
-            //  .Add("Back", ConsoleMenu.Close).Show());
-
+              .Add("Exit", ConsoleMenu.Close);           
 
             menu.Show();
 
-
-            //menu.Show();
         }
 
         public void ListItems<T>(List<T> items)
@@ -503,6 +494,8 @@ namespace DFQXYU_HFT_2021221.Client
             }
             else
             {
+                //rCreate.Movie = rMovieCreate;
+                //rCreate.Customer = rCustomerCreate;
                 restService.Post<MovieRental>(rCreate, "movierental");
             }
 
@@ -567,6 +560,6 @@ namespace DFQXYU_HFT_2021221.Client
                 }
             }
             Console.ReadLine();
-        }
+        }   
     }
 }
