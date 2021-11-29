@@ -18,11 +18,14 @@ namespace DFQXYU_HFT_2021221.Test
         MovieRentalLogic movieRentalLogic;
         MovieLogic movieLogic;
         CustomerLogic customerLogic;
+        Mock<IMovieRentalRepository> mockMovieREntalRepository;
+        Mock<IMovieRepository> mockMovieRepository;
+        Mock<ICustomerRepository> mockCustomerRepository;
         public TestClass()
         {
-            Mock<IMovieRentalRepository> mockMovieREntalRepository = new Mock<IMovieRentalRepository>();
-            Mock<IMovieRepository> mockMovieRepository = new Mock<IMovieRepository>();
-            Mock<ICustomerRepository> mockCustomerRepository = new Mock<ICustomerRepository>();
+            mockMovieREntalRepository = new Mock<IMovieRentalRepository>(MockBehavior.Loose);
+            mockMovieRepository = new Mock<IMovieRepository>(MockBehavior.Loose);
+            mockCustomerRepository = new Mock<ICustomerRepository>(MockBehavior.Loose);
 
             Movie fakeMovie = new Movie()
             {
@@ -101,6 +104,7 @@ namespace DFQXYU_HFT_2021221.Test
                 );
             mockMovieRepository.Setup(t => t.Read(1)).Returns(fakeMovie);
             mockCustomerRepository.Setup(t => t.Read(1)).Returns(fakeCustomer);
+            mockMovieRepository.Setup(t => t.Delete(It.IsAny<int>()));
             mockCustomerRepository.Setup(t => t.ReadAll()
             ).Returns(
                 new List<Customer>() { fakeCustomer, fakeCustomer2 }.AsQueryable()
@@ -113,7 +117,7 @@ namespace DFQXYU_HFT_2021221.Test
             var v = movieRentalLogic.Read(1);
             var v2 = movieRentalLogic.ReadAll();
             var vv = movieLogic.ReadAll();
-            var vv2 = movieLogic.Read(1);            
+            var vv2 = movieLogic.Read(1);
         }
 
         [TestCase(true, "Troy", 2004, "Wolfgang Petersen", "USA", 2000)]
@@ -427,8 +431,8 @@ namespace DFQXYU_HFT_2021221.Test
         {
             var result = movieRentalLogic.RentalsWithNotJamesCameronAndCustomerBornDateIs2000().ToArray();
             Assert.That(result[0].GetHashCode(), Is.EqualTo(new { CustomerName = "Kiss Laci", RentalID = 1 }.GetHashCode()));
-        }            
-       
+        }
+
         [Test]
         public void TestRentalsByLaci()
         {
@@ -472,7 +476,7 @@ namespace DFQXYU_HFT_2021221.Test
             ));
         }
 
-        [TestCase(true, 1,"Troy", 2004, "Wolfgang Petersen", "USA", 2000)]
+        [TestCase(true, 1, "Troy", 2004, "Wolfgang Petersen", "USA", 2000)]
         [TestCase(true, 1, "D", 2004, "Wolfgang Petersen", "USA", null)]
         [TestCase(false, 1, null, 2004, "Wolfgang Petersen", "USA", 2000)]
         [TestCase(false, 1, "A", -2004, "Wolfgang Petersen", "USA", 2000)]
@@ -519,8 +523,8 @@ namespace DFQXYU_HFT_2021221.Test
                     );
             }
         }
-       
-        [TestCase(true,1, "1Kiss Béla", "2000-11-22", "xyz@gmail.com", 203334567, false)]
+
+        [TestCase(true, 1, "1Kiss Béla", "2000-11-22", "xyz@gmail.com", 203334567, false)]
         [TestCase(false, 1, "", "2000-11-22", "xyz@gmail.com", 203334567, false)]
         [TestCase(false, 1, null, "2000-11-22", "xyz@gmail.com", 203334567, false)]
         [TestCase(false, 1, "2Kiss Béla", default, "xyz@gmail.com", 203334567, false)]
@@ -530,7 +534,7 @@ namespace DFQXYU_HFT_2021221.Test
         [TestCase(false, 1, "6Kiss Béla", "2000-11-11", "xyz@gmail.com", 13334567, false)]
         [TestCase(false, 1, "7Kiss Béla", "2000-11-11", "xyz@gmail.com", null, false)]
         [TestCase(false, 100, "8Kiss Béla", "2000-11-22", "xyz@gmail.com", 203334567, false)]
-        public void UpdateCustomerTest(bool result,int id , string name, DateTime bornDate, string email, int phoneNumber, bool regularCustomer)
+        public void UpdateCustomerTest(bool result, int id, string name, DateTime bornDate, string email, int phoneNumber, bool regularCustomer)
         {
             if (result)
             {
@@ -540,7 +544,7 @@ namespace DFQXYU_HFT_2021221.Test
                         customerLogic.Update(
                             new Customer()
                             {
-                                CustomerID =id,
+                                CustomerID = id,
                                 Name = name,
                                 BornDate = bornDate,
                                 Email = email,
@@ -568,6 +572,15 @@ namespace DFQXYU_HFT_2021221.Test
                     }, Throws.Exception
                     );
             }
+        }
+       
+        [TestCase(1)]
+        [TestCase(6)]
+        public void TestDeleteMovie(int id)
+        {
+            this.mockMovieRepository.Setup(t => t.Delete(It.IsAny<int>()));
+            this.movieRentalLogic.Delete(id);
+            this.mockMovieRepository.Verify(t => t.Delete(id), Times.Once);
         }
     }
 }
