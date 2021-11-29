@@ -155,10 +155,10 @@ namespace DFQXYU_HFT_2021221.Logic
             {
                 throw new ArgumentNullException("rental");
             }
-            else if (rental.MovieID != rental.Movie.MovieID || rental.CustomerID != rental.Customer.CustomerID)
-            {
-                throw new ArgumentException("IDs must match");
-            }
+            //else if (rental.MovieID != rental.Movie.MovieID || rental.CustomerID != rental.Customer.CustomerID)
+            //{
+            //    throw new ArgumentException("IDs must match");
+            //}
             else if (Read(rental.RentalID) == null)
             {
                 throw new ArgumentException("ID not found");
