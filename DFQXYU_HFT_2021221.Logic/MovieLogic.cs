@@ -27,7 +27,7 @@ namespace DFQXYU_HFT_2021221.Logic
             }
             else if (movie.Year.ToString().Length > 4 || movie.Year < 0)
             {
-                throw new ArgumentNullException("Wrong format");
+                throw new ArgumentException("Wrong format");
             }
             else if (movie.Year < 0)
             {

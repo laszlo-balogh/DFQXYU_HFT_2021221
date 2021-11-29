@@ -111,18 +111,18 @@ namespace DFQXYU_HFT_2021221.Logic
             {
                 throw new ArgumentNullException("rental");
             }
-            else if (rental.Movie == null)
-            {
-                throw new ArgumentNullException("Rental's movie cannot be null");
-            }
-            else if (rental.Customer == null)
-            {
-                throw new ArgumentNullException("Rental's customer cannot be null");
-            }
-            else if (rental.MovieID != rental.Movie.MovieID || rental.CustomerID != rental.Customer.CustomerID)
-            {
-                throw new ArgumentException("IDs must match");
-            }
+            //else if (rental.Movie == null)
+            //{
+            //    throw new ArgumentNullException("Rental's movie cannot be null");
+            //}
+            //else if (rental.Customer == null)
+            //{
+            //    throw new ArgumentNullException("Rental's customer cannot be null");
+            //}
+            //else if (rental.MovieID != rental.Movie.MovieID || rental.CustomerID != rental.Customer.CustomerID)
+            //{
+            //    throw new ArgumentException("IDs must match");
+            //}
             this.movieRentalRepo.Create(rental);
         }
 
