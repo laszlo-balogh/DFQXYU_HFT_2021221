@@ -42,6 +42,15 @@ namespace DFQXYU_HFT_2021221.Endpoint.Controllers
         {
             return logic.RentalsWithNotJamesCameronAndCustomerBornDateIs2000();
         }
-
+        [HttpGet]
+        public IEnumerable<object> RentalsByLaci()
+        {
+            return logic.RentalsByLaci();
+        }
+        [HttpGet]
+        public IEnumerable<object> RentalsCustomerBefore2000()
+        {
+            return logic.RentalsCustomerBefore2000();
+        }
     }
 }
