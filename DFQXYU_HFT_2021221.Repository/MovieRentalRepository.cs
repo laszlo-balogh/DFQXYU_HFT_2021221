@@ -40,14 +40,12 @@ namespace DFQXYU_HFT_2021221.Repository
 
         public void Update(MovieRental rental)
         {
-            var oldRental = Read(rental.RentalID);
-            oldRental.Movie = rental.Movie;
+            var oldRental = Read(rental.RentalID);           
             oldRental.MovieID = rental.MovieID;
             oldRental.Promotions = rental.Promotions;
             oldRental.StartDate = rental.StartDate;
             oldRental.EndDate = rental.EndDate;
-            oldRental.CustomerID = rental.CustomerID;
-            oldRental.Customer = rental.Customer;
+            oldRental.CustomerID = rental.CustomerID;         
             db.SaveChanges();
         }
     }
