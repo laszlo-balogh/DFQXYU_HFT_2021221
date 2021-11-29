@@ -101,11 +101,20 @@ namespace DFQXYU_HFT_2021221.Client
                     .Add("Create", () => CreateItemR("Create"))
                     .Add("Back", ConsoleMenu.Close).Show())
                 .Add("Back", ConsoleMenu.Close).Show())
-                .Add("Delete", () => new ConsoleMenu()
+                .Add("Delete ...", () => new ConsoleMenu()
                  .Add("Movie", () => DeleteItem("movie"))
                  .Add("Customer", () => DeleteItem("customer"))
                  .Add("Rental", () => DeleteItem("rental"))
                  .Add("Back", ConsoleMenu.Close).Show())
+                .Add("Non-Cruds", () => new ConsoleMenu()
+                .Add("RentalsByCustomerNames", () =>NonCrud("RentalsByCustomerNames"))
+                .Add("RentalsWithIsRegularCustomer",()=>NonCrud("RentalsWithIsRegularCustomer"))
+                .Add("RentalsWithBefore2000", ()=>NonCrud("RentalsWithBefore2000"))
+                .Add("RentalsWithJamesCameronMovies", ()=>NonCrud("RentalsWithJamesCameronMovies"))
+                .Add("RentalsWithNotJamesCameronAndCustomerBornDateIs2000", ()=>NonCrud("RentalsWithNotJamesCameronAndCustomerBornDateIs2000"))
+                .Add("RentalsByLaci", ()=>NonCrud("RentalsByLaci"))
+                .Add("RentalsCustomerBefore2000", ()=>NonCrud("RentalsCustomerBefore2000"))
+                .Add("Back",ConsoleMenu.Close).Show())
               .Add("Exit", ConsoleMenu.Close);
 
 
@@ -497,6 +506,67 @@ namespace DFQXYU_HFT_2021221.Client
                 restService.Post<MovieRental>(rCreate, "movierental");
             }
 
+        }
+        public void NonCrud(string property)
+        {
+            Console.Clear();
+            if (property== "RentalsByCustomerNames")
+            {
+                var v = restService.Get<object>("noncrud/RentalsByCustomerNames");
+                foreach (var item in v)
+                {
+                    Console.WriteLine(item);
+                }
+            }
+            else if (property== "RentalsWithIsRegularCustomer")
+            {
+                var v = restService.Get<object>("noncrud/RentalsWithIsRegularCustomer");
+                foreach (var item in v)
+                {
+                    Console.WriteLine(item);
+                }
+            }
+            else if (property== "RentalsWithBefore2000")
+            {
+                var v = restService.Get<object>("noncrud/RentalsWithBefore2000");
+                foreach (var item in v)
+                {
+                    Console.WriteLine(item);
+                }
+            }
+            else if (property== "RentalsWithJamesCameronMovies")
+            {
+                var v = restService.Get<object>("noncrud/RentalsWithJamesCameronMovies");
+                foreach (var item in v)
+                {
+                    Console.WriteLine(item);
+                }
+            }
+            else if (property== "RentalsWithNotJamesCameronAndCustomerBornDateIs2000")
+            {
+                var v = restService.Get<object>("noncrud/RentalsWithNotJamesCameronAndCustomerBornDateIs2000");
+                foreach (var item in v)
+                {
+                    Console.WriteLine(item);
+                }
+            }
+            else if (property== "RentalsByLaci")
+            {
+                var v = restService.Get<object>("noncrud/RentalsByLaci");
+                foreach (var item in v)
+                {
+                    Console.WriteLine(item);
+                }
+            }
+            else if (property== "RentalsCustomerBefore2000")
+            {
+                var v = restService.Get<object>("noncrud/RentalsCustomerBefore2000");
+                foreach (var item in v)
+                {
+                    Console.WriteLine(item);
+                }
+            }
+            Console.ReadLine();
         }
     }
 }

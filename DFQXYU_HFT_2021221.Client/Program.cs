@@ -46,10 +46,10 @@ namespace DFQXYU_HFT_2021221.Client
             //var vvv = mlog.Read(1);
             //;
             //Movie m1 = new Movie() { MovieID = 1, MovieTitle = "Raq Park", Year = 1993, Producer = "Steven dzsonnis", Location = "USA", Price = 2000 };
-            //Movie m2 = new Movie() {  MovieTitle = "Raq Park2", Year = 1992, Producer = "Steven dzsonnis2", Location = "USA2", Price = 2002 };
+            Movie m2 = new Movie() { MovieTitle = "Raq Park2", Year = 1992, Producer = "Steven dzsonnis2", Location = "USA2", Price = 2002 };
 
             //restService.Post<Movie>(m2, "movie");
-            //;
+            ;
             Menu m = new Menu(restService);
             m.Start();
             //foreach (var item in movies)
