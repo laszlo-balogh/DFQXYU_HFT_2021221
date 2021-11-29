@@ -39,7 +39,7 @@ namespace DFQXYU_HFT_2021221.Data
                 .HasMany(m => m.Rentals)
                 .WithOne(r => r.Movie)
                 .HasForeignKey(m => m.MovieID)
-                .OnDelete(DeleteBehavior.ClientSetNull);
+                .OnDelete(DeleteBehavior.Cascade);
 
             });
 
@@ -50,7 +50,7 @@ namespace DFQXYU_HFT_2021221.Data
                 .HasMany/*<MovieRental>*/(c => c.Rentals)
                 .WithOne(r => r.Customer)
                 .HasForeignKey(c => c.CustomerID)
-                .OnDelete(DeleteBehavior.ClientSetNull);
+                .OnDelete(DeleteBehavior.Cascade);
 
             });
 
@@ -60,14 +60,14 @@ namespace DFQXYU_HFT_2021221.Data
                 .HasOne(r => r.Movie)
                 .WithMany(m => m.Rentals)
                 .HasForeignKey(r => r.MovieID)
-                .OnDelete(DeleteBehavior.ClientSetNull);
+                .OnDelete(DeleteBehavior.Cascade);
 
                
 
                 entity.HasOne(r => r.Customer)
                .WithMany(c => c.Rentals)
                .HasForeignKey(r => r.CustomerID)
-               .OnDelete(DeleteBehavior.ClientSetNull);
+               .OnDelete(DeleteBehavior.Cascade);
 
                 
             });
