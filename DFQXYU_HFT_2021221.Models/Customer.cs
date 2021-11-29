@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace DFQXYU_HFT_2021221.Models
@@ -14,22 +15,23 @@ namespace DFQXYU_HFT_2021221.Models
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int CustomerID { get; set; }
-        [Required]
+        //[Required]
         public string Name { get; set; }
         [Required]
         public DateTime BornDate { get; set; }
-        [Required]
+        //[Required]
         public string Email { get; set; }
         [Required]
-        [MaxLength(9)]
-        [MinLength(9)]
+        //[MaxLength(9)]
+        //[MinLength(9)]
         public int PhoneNumber { get; set; }
+        [JsonIgnore]
         [NotMapped]
         public virtual ICollection<MovieRental> Rentals { get; set; }
         public bool RegularCustomer { get; set; }
         public Customer()
         {
-            this.Rentals = new HashSet<MovieRental>();
+            //this.Rentals = new HashSet<MovieRental>();
             this.RegularCustomer = false;
         }
 
