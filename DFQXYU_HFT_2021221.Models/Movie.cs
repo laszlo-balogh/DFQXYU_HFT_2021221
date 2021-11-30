@@ -17,7 +17,6 @@ namespace DFQXYU_HFT_2021221.Models
         public int MovieID { get; set; }
         [Required]
         public string MovieTitle { get; set; }
-        //[MaxLength(4)]
         public int Year { get; set; }
         public string Producer { get; set; }
         public string Location { get; set; }
@@ -29,13 +28,24 @@ namespace DFQXYU_HFT_2021221.Models
 
         public Movie()
         {
-            //this.Rentals = new HashSet<MovieRental>();
+            this.Rentals = new HashSet<MovieRental>();
         }
         public override string ToString()
         {
             string s = $"MovieID = {MovieID} - MovieTitle = {MovieTitle} - Year = {Year}" +
                 $"- Producer = {Producer} - Location = {Location} - Price = {Price}";
             return s;
+        }
+        public override bool Equals(object obj)
+        {
+            Movie m = obj as Movie;
+            return m.MovieID == this.MovieID && m.MovieTitle == this.MovieTitle 
+                && m.Location == this.Location && m.Price == this.Price && m.Year == this.Year;
+        }
+
+        public override int GetHashCode()
+        {
+            return this.MovieID + this.Year + (int)this.Price + this.MovieTitle.GetHashCode();
         }
     }
 }

@@ -32,9 +32,7 @@ namespace DFQXYU_HFT_2021221.Models
         public MovieRental()
         {
             this.StartDate = DateTime.Now;
-            this.EndDate = this.StartDate.AddDays(30);
-            //    this.CustomerID = Customer.CustomerID;
-            //    this.MovieID = Movie.MovieID;
+            this.EndDate = this.StartDate.AddDays(30);           
         }
 
         public override string ToString()
@@ -42,6 +40,19 @@ namespace DFQXYU_HFT_2021221.Models
             string s = $"RentalID = {RentalID} - StartDate = {StartDate} - EndDate = {EndDate}" +
                 $"- Prmotions = {Promotions} - MovieID = {MovieID} - CustomerID = {CustomerID}";
             return s;
+        }
+
+        public override bool Equals(object obj)
+        {
+            MovieRental mr = obj as MovieRental;
+            return mr.RentalID == this.RentalID && mr.MovieID == this.MovieID && mr.CustomerID == this.CustomerID
+                && mr.StartDate == this.StartDate && mr.EndDate == this.EndDate && mr.Promotions == this.Promotions;
+        }
+
+        public override int GetHashCode()
+        {
+            return this.RentalID + this.MovieID + this.CustomerID + this.StartDate.Year + this.StartDate.Day + this.EndDate.Year
+                 + this.EndDate.Day + this.StartDate.Month + this.EndDate.Month;
         }
     }
 }

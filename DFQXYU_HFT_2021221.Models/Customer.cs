@@ -15,15 +15,13 @@ namespace DFQXYU_HFT_2021221.Models
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int CustomerID { get; set; }
-        //[Required]
+        [Required]
         public string Name { get; set; }
         [Required]
         public DateTime BornDate { get; set; }
-        //[Required]
-        public string Email { get; set; }
         [Required]
-        //[MaxLength(9)]
-        //[MinLength(9)]
+        public string Email { get; set; }
+        [Required]      
         public int PhoneNumber { get; set; }
         [JsonIgnore]
         [NotMapped]
@@ -31,7 +29,7 @@ namespace DFQXYU_HFT_2021221.Models
         public bool RegularCustomer { get; set; }
         public Customer()
         {
-            //this.Rentals = new HashSet<MovieRental>();
+            this.Rentals = new HashSet<MovieRental>();
             this.RegularCustomer = false;
         }
 
@@ -42,5 +40,17 @@ namespace DFQXYU_HFT_2021221.Models
             return s;
         }
 
+        public override bool Equals(object obj)
+        {
+            Customer c = obj as Customer;
+            return c.CustomerID == this.CustomerID && c.BornDate == this.BornDate && c.Name == this.Name
+                && c.Email == this.Email && c.PhoneNumber == this.PhoneNumber;
+            
+        }
+
+        public override int GetHashCode()
+        {
+            return this.CustomerID + this.BornDate.Year+this.BornDate.Month+this.BornDate.Day + this.PhoneNumber;
+        }
     }
 }
