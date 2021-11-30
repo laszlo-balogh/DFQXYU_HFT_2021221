@@ -98,26 +98,27 @@ namespace DFQXYU_HFT_2021221.Test
                     }
                 }.AsQueryable()
                 );
+
             mockMovieRepository.Setup(t => t.ReadAll()
             ).Returns(
                 new List<Movie>() { fakeMovie, fakeMovie2 }.AsQueryable()
                 );
-            mockMovieRepository.Setup(t => t.Read(1)).Returns(fakeMovie);
-            mockCustomerRepository.Setup(t => t.Read(1)).Returns(fakeCustomer);
-            mockMovieRepository.Setup(t => t.Delete(It.IsAny<int>()));
             mockCustomerRepository.Setup(t => t.ReadAll()
             ).Returns(
-                new List<Customer>() { fakeCustomer, fakeCustomer2 }.AsQueryable()
-                );
+               new List<Customer>() { fakeCustomer, fakeCustomer2 }.AsQueryable()
+               );
+            mockMovieRepository.Setup(t => t.Read(1)).Returns(fakeMovie);
+            mockMovieRepository.Setup(t => t.Delete(It.IsAny<int>()));
+
+
+            mockCustomerRepository.Setup(t => t.Read(1)).Returns(fakeCustomer);
+            mockCustomerRepository.Setup(t => t.Delete(It.IsAny<int>()));
+
             movieRentalLogic = new MovieRentalLogic(mockMovieREntalRepository.Object,
                 mockMovieRepository.Object, mockCustomerRepository.Object);
             movieLogic = new MovieLogic(mockMovieRepository.Object);
             customerLogic = new CustomerLogic(mockCustomerRepository.Object);
-
-            var v = movieRentalLogic.Read(1);
-            var v2 = movieRentalLogic.ReadAll();
-            var vv = movieLogic.ReadAll();
-            var vv2 = movieLogic.Read(1);
+                    
         }
 
         [TestCase(true, "Troy", 2004, "Wolfgang Petersen", "USA", 2000)]
@@ -213,176 +214,6 @@ namespace DFQXYU_HFT_2021221.Test
             }
         }
 
-        //[TestCase(true, 1, 1, 1, 1)]
-        //[TestCase(false, 1, 2, 1, 1)]
-        //[TestCase(false, 1, 1, 1, 2)]
-        //[TestCase(false, 2, 1, 1, 1)]
-        //[TestCase(false, 1, 1, 2, 1)]
-        //public void CreateRentalTest(bool result, int movieID, int customerID, int rMovieID, int rCustomerID)
-        //{
-        //    if (result)
-        //    {
-        //        Assert.That(
-        //            () =>
-        //            {
-        //                movieRentalLogic.Create(
-        //                    new MovieRental()
-        //                    {
-        //                        Movie = new Movie()
-        //                        {
-        //                            MovieID = movieID,
-        //                            MovieTitle = "Troy",
-        //                            Year = 2004,
-        //                            Producer = "Wolfgang Petersen",
-        //                            Location = "USA",
-        //                            Price = 2000
-        //                        },
-        //                        Customer = new Customer()
-        //                        {
-        //                            CustomerID = customerID,
-        //                            Name = "Kiss Dániel",
-        //                            BornDate = new DateTime(1999, 08, 11),
-        //                            Email = "kiss.daniel@gmail.com",
-        //                            PhoneNumber = 203334567,
-        //                            RegularCustomer = false
-        //                        },
-        //                        MovieID = rMovieID,
-        //                        CustomerID = rCustomerID
-        //                    });
-        //            }, Throws.Nothing
-        //            );
-
-        //    }
-        //    else
-        //    {
-        //        Assert.That(
-        //            () =>
-        //            {
-        //                movieRentalLogic.Create(
-        //                    new MovieRental()
-        //                    {
-        //                        Movie = new Movie()
-        //                        {
-        //                            MovieID = movieID,
-        //                            MovieTitle = "Troy",
-        //                            Year = 2004,
-        //                            Producer = "Wolfgang Petersen",
-        //                            Location = "USA",
-        //                            Price = 2000
-        //                        },
-        //                        Customer = new Customer()
-        //                        {
-        //                            CustomerID = customerID,
-        //                            Name = "Kiss Dániel",
-        //                            BornDate = new DateTime(1999, 08, 11),
-        //                            Email = "kiss.daniel@gmail.com",
-        //                            PhoneNumber = 203334567,
-        //                            RegularCustomer = false
-        //                        },
-        //                        MovieID = rMovieID,
-        //                        CustomerID = rCustomerID
-        //                    });
-        //            }, Throws.Exception
-        //            );
-        //    }
-        //}
-
-        //[TestCase(false, null)]
-        //public void CreateRentalNullMovieTest(bool result, Movie movie)
-        //{
-        //    if (result)
-        //    {
-        //        Assert.That(
-        //            () =>
-        //            {
-        //                movieRentalLogic.Create(
-        //                    new MovieRental()
-        //                    {
-        //                        Movie = movie,
-        //                        Customer = new Customer()
-        //                        {
-        //                            Name = "Kiss Dániel",
-        //                            BornDate = new DateTime(1999, 08, 11),
-        //                            Email = "kiss.daniel@gmail.com",
-        //                            PhoneNumber = 203334567,
-        //                            RegularCustomer = false
-        //                        }
-        //                    });
-        //            }, Throws.Nothing
-        //            );
-
-        //    }
-        //    else
-        //    {
-        //        Assert.That(
-        //            () =>
-        //            {
-        //                movieRentalLogic.Create(
-        //                   new MovieRental()
-        //                   {
-        //                       Movie = movie,
-        //                       Customer = new Customer()
-        //                       {
-        //                           Name = "Kiss Dániel",
-        //                           BornDate = new DateTime(1999, 08, 11),
-        //                           Email = "kiss.daniel@gmail.com",
-        //                           PhoneNumber = 203334567,
-        //                           RegularCustomer = false
-        //                       }
-
-        //                   });
-        //            }, Throws.Exception
-        //            );
-        //    }
-        //}
-        //[TestCase(false, null)]
-        //public void CreateRentalNullCustomerTest(bool result, Customer customer)
-        //{
-        //    if (result)
-        //    {
-        //        Assert.That(
-        //            () =>
-        //            {
-        //                movieRentalLogic.Create(
-        //                    new MovieRental()
-        //                    {
-        //                        Movie = new Movie()
-        //                        {
-        //                            MovieTitle = "Troy",
-        //                            Year = 2004,
-        //                            Producer = "Wolfgang Petersen",
-        //                            Location = "USA",
-        //                            Price = 2000
-        //                        },
-        //                        Customer = customer
-        //                    });
-        //            }, Throws.Nothing
-        //            );
-
-        //    }
-        //    else
-        //    {
-        //        Assert.That(
-        //            () =>
-        //            {
-        //                movieRentalLogic.Create(
-        //                   new MovieRental()
-        //                   {
-        //                       Movie = new Movie()
-        //                       {
-        //                           MovieTitle = "Troy",
-        //                           Year = 2004,
-        //                           Producer = "Wolfgang Petersen",
-        //                           Location = "USA",
-        //                           Price = 2000
-        //                       },
-        //                       Customer = customer
-
-        //                   });
-        //            }, Throws.Exception
-        //            );
-        //    }
-        //}
         [TestCase(null)]
         public void CreateMovieIsNullTest(Movie movie)
         {
@@ -573,7 +404,19 @@ namespace DFQXYU_HFT_2021221.Test
                     );
             }
         }
-       
-       
+
+        [TestCase(1)]
+        public void ReadMovieTest(int id)
+        {
+            var v = movieLogic.Read(1);
+            this.mockMovieRepository.Verify(x => x.Read(id), Times.Once);
+        }
+
+        [TestCase(1)]
+        public void ReadCustomerTest(int id)
+        {             
+            var v = customerLogic.Read(1);
+            this.mockCustomerRepository.Verify(x => x.Read(id), Times.Once);
+        }
     }
 }
