@@ -45,8 +45,7 @@ namespace DFQXYU_HFT_2021221.Repository
             oldMovie.Location = movie.Location;
             oldMovie.MovieTitle = movie.MovieTitle;
             oldMovie.Price = movie.Price;
-            oldMovie.Producer = movie.Producer;
-            oldMovie.Rentals = movie.Rentals;
+            oldMovie.Producer = movie.Producer;  
             oldMovie.Year = movie.Year;                   
             db.SaveChanges();
         }

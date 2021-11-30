@@ -45,6 +45,7 @@ namespace DFQXYU_HFT_2021221.Repository
             oldCustomer.Name = customer.Name;
             oldCustomer.PhoneNumber = customer.PhoneNumber;
             oldCustomer.Rentals = customer.Rentals;
+            oldCustomer.RegularCustomer = customer.RegularCustomer;
             db.SaveChanges();
         }
     }
