@@ -16,9 +16,7 @@ namespace DFQXYU_HFT_2021221.Client
         Customer cUpdate;
         Customer cCreate;
         MovieRental rUpdate;
-        MovieRental rCreate;
-        Movie rMovieCreate;
-        Customer rCustomerCreate;
+        MovieRental rCreate;        
 
         public Menu(RestService restService)
         {
@@ -28,10 +26,7 @@ namespace DFQXYU_HFT_2021221.Client
             cUpdate = new Customer();
             cCreate = new Customer();
             rUpdate = new MovieRental();
-            rCreate = new MovieRental();
-            rMovieCreate = new Movie();
-            rCustomerCreate = new Customer();
-
+            rCreate = new MovieRental();           
         }
 
         public void Start()
