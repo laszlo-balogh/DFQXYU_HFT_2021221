@@ -47,7 +47,7 @@ namespace DFQXYU_HFT_2021221.Data
             modelBuilder.Entity<Customer>(entity =>
             {
                 entity
-                .HasMany/*<MovieRental>*/(c => c.Rentals)
+                .HasMany(c => c.Rentals)
                 .WithOne(r => r.Customer)
                 .HasForeignKey(c => c.CustomerID)
                 .OnDelete(DeleteBehavior.Cascade);
