@@ -41,7 +41,7 @@ namespace DFQXYU_HFT_2021221.Test
                 MovieID = 2,
                 MovieTitle = "Pirates of the Caribbean",
                 Year = 2003,
-                Producer = "James Cameron", //not really
+                Producer = "James Cameron", //Gore Verbinski
                 Location = "USA",
                 Price = 4000
             };
@@ -114,6 +114,8 @@ namespace DFQXYU_HFT_2021221.Test
             mockCustomerRepository.Setup(t => t.Read(1)).Returns(fakeCustomer);
             mockCustomerRepository.Setup(t => t.Delete(It.IsAny<int>()));
 
+            mockMovieREntalRepository.Setup(t=>t.Delete(It.IsAny<int>()));
+
             movieRentalLogic = new MovieRentalLogic(mockMovieREntalRepository.Object,
                 mockMovieRepository.Object, mockCustomerRepository.Object);
             movieLogic = new MovieLogic(mockMovieRepository.Object);
@@ -173,8 +175,7 @@ namespace DFQXYU_HFT_2021221.Test
         [TestCase(false, "2Kiss Béla", default, "xyz@gmail.com", 203334567, false)]
         [TestCase(false, "3Kiss Béla", "2000-11-11", "xyzgmail.com", 203334567, false)]
         [TestCase(false, "4Kiss Béla", "2000-11-11", "xyz@gmailcom", 203334567, false)]
-        [TestCase(false, "5Kiss Béla", "2000-11-11", "xyz@gmail.com", -13334567, false)]
-        [TestCase(false, "6Kiss Béla", "2000-11-11", "xyz@gmail.com", 13334567, false)]
+        [TestCase(false, "5Kiss Béla", "2000-11-11", "xyz@gmail.com", -13334567, false)]        
         [TestCase(false, "7Kiss Béla", "2000-11-11", "xyz@gmail.com", null, false)]
         public void CreateCustomerTest(bool result, string name, DateTime bornDate, string email, int phoneNumber, bool regularCustomer)
         {
@@ -361,8 +362,7 @@ namespace DFQXYU_HFT_2021221.Test
         [TestCase(false, 1, "2Kiss Béla", default, "xyz@gmail.com", 203334567, false)]
         [TestCase(false, 1, "3Kiss Béla", "2000-11-11", "xyzgmail.com", 203334567, false)]
         [TestCase(false, 1, "4Kiss Béla", "2000-11-11", "xyz@gmailcom", 203334567, false)]
-        [TestCase(false, 1, "5Kiss Béla", "2000-11-11", "xyz@gmail.com", -13334567, false)]
-        [TestCase(false, 1, "6Kiss Béla", "2000-11-11", "xyz@gmail.com", 13334567, false)]
+        [TestCase(false, 1, "5Kiss Béla", "2000-11-11", "xyz@gmail.com", -13334567, false)]        
         [TestCase(false, 1, "7Kiss Béla", "2000-11-11", "xyz@gmail.com", null, false)]
         [TestCase(false, 100, "8Kiss Béla", "2000-11-22", "xyz@gmail.com", 203334567, false)]
         public void UpdateCustomerTest(bool result, int id, string name, DateTime bornDate, string email, int phoneNumber, bool regularCustomer)
@@ -418,5 +418,13 @@ namespace DFQXYU_HFT_2021221.Test
             var v = customerLogic.Read(1);
             this.mockCustomerRepository.Verify(x => x.Read(id), Times.Once);
         }
+
+        [TestCase(1)]
+        public void DeleteMovieRentalTest(int id)
+        {
+            movieRentalLogic.Delete(id);
+            this.mockMovieREntalRepository.Verify(x => x.Delete(id), Times.Once);
+        }
+        
     }
 }
