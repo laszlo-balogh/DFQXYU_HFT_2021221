@@ -49,6 +49,10 @@ namespace DFQXYU_HFT_2021221.Logic
             {
                 throw new IndexOutOfRangeException("Minimum id value is 1");
             }
+            else if (this.movieRepo.Read(id)==null)
+            {
+                throw new IndexOutOfRangeException("Movie not found");
+            }
             this.movieRepo.Delete(id);
         }
 

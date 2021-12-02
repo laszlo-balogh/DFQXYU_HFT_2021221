@@ -22,11 +22,9 @@ namespace DFQXYU_HFT_2021221.Logic
         }
         public IEnumerable<object> RentalsWithBefore2000()
         {            
-            var v1 = from x in movieRentalRepo.ReadAll()
-                     //join movie in movieRepo.ReadAll()
-                     //on x.MovieID equals movie.MovieID
+            var v1 = from x in movieRentalRepo.ReadAll()                    
                      where x.Movie.Year < 2000
-                     select new /*RentalsWithBefore2000Class()*/
+                     select new 
                      {
                          RentalID = x.RentalID,
                          Name = x.Movie.MovieTitle,
@@ -36,12 +34,7 @@ namespace DFQXYU_HFT_2021221.Logic
         }
         public IEnumerable<object> RentalsWithNotJamesCameronAndCustomerBornDateIs2000()
         {
-            var v1 = from x in movieRentalRepo.ReadAll()
-          //         from movie in movieRepo.ReadAll()  
-          //         join rental in movieRentalRepo.ReadAll()
-          //         on movie.MovieID equals rental.MovieID
-          //         join customer in customerRepo.ReadAll()
-          //         on rental.CustomerID equals customer.CustomerID
+            var v1 = from x in movieRentalRepo.ReadAll()         
                      where !x.Movie.Producer.Contains("James Cameron") && x.Customer.BornDate.Year == 2000
                      select new
                      {
@@ -52,18 +45,9 @@ namespace DFQXYU_HFT_2021221.Logic
         }
         public IEnumerable<object> RentalsByCustomerNames()
         {
-            var v1 = from x in movieRentalRepo.ReadAll()
-                         // from customer in customerRepo.ReadAll()
-                         //join rental in movieRentalRepo.ReadAll()
-                         //on customer.CustomerID equals rental.CustomerID
-                         //join movie in movieRepo.ReadAll()
-                         //on rental.MovieID equals movie.MovieID
+            var v1 = from x in movieRentalRepo.ReadAll()                      
                      select new
-                     {
-                         //    Name = customer.Name,
-                         //    RentalID = rental.RentalID,
-                         //    Movie = movie.MovieTitle
-
+                     {                        
                          Name = x.Customer.Name,
                          RentalID = x.RentalID,
                          Movie = x.Movie.MovieTitle
@@ -73,9 +57,7 @@ namespace DFQXYU_HFT_2021221.Logic
         }
         public IEnumerable<object> RentalsWithIsRegularCustomer()
         {
-            var v1 = from x in movieRentalRepo.ReadAll()
-                         //join customer in customerRepo.ReadAll()
-                         //on x.CustomerID equals customer.CustomerID
+            var v1 = from x in movieRentalRepo.ReadAll()                         
                      where x.Customer.RegularCustomer == true
                      select new
                      {
@@ -90,9 +72,7 @@ namespace DFQXYU_HFT_2021221.Logic
 
         public IEnumerable<object> RentalsWithJamesCameronMovies()
         {
-            var v1 = from x in movieRentalRepo.ReadAll()
-                         //join movie in movieRepo.ReadAll()
-                         //on x.MovieID equals movie.MovieID
+            var v1 = from x in movieRentalRepo.ReadAll()                       
                      where x.Movie.Producer.Contains("James Cameron")
                      select new
                      {
@@ -110,19 +90,7 @@ namespace DFQXYU_HFT_2021221.Logic
             if (rental == null)
             {
                 throw new ArgumentNullException("rental");
-            }
-            //else if (rental.Movie == null)
-            //{
-            //    throw new ArgumentNullException("Rental's movie cannot be null");
-            //}
-            //else if (rental.Customer == null)
-            //{
-            //    throw new ArgumentNullException("Rental's customer cannot be null");
-            //}
-            //else if (rental.MovieID != rental.Movie.MovieID || rental.CustomerID != rental.Customer.CustomerID)
-            //{
-            //    throw new ArgumentException("IDs must match");
-            //}
+            }           
             this.movieRentalRepo.Create(rental);
         }
 
@@ -131,6 +99,10 @@ namespace DFQXYU_HFT_2021221.Logic
             if (id < 1)
             {
                 throw new IndexOutOfRangeException("Minimum id value is 1");
+            }
+            else if (this.movieRentalRepo.Read(id) == null)
+            {
+                throw new IndexOutOfRangeException("Rental not found");
             }
             this.movieRentalRepo.Delete(id);
         }
@@ -154,11 +126,7 @@ namespace DFQXYU_HFT_2021221.Logic
             if (rental == null)
             {
                 throw new ArgumentNullException("rental");
-            }
-            //else if (rental.MovieID != rental.Movie.MovieID || rental.CustomerID != rental.Customer.CustomerID)
-            //{
-            //    throw new ArgumentException("IDs must match");
-            //}
+            }           
             else if (Read(rental.RentalID) == null)
             {
                 throw new ArgumentException("ID not found");
