@@ -39,18 +39,5 @@ namespace DFQXYU_HFT_2021221.Models
                 $"- Email = {Email} - PhoneNumber = {PhoneNumber} - RegularCustomer = {RegularCustomer}";
             return s;
         }
-
-        public override bool Equals(object obj)
-        {
-            Customer c = obj as Customer;
-            return c.CustomerID == this.CustomerID && c.BornDate == this.BornDate && c.Name == this.Name
-                && c.Email == this.Email && c.PhoneNumber == this.PhoneNumber;
-            
-        }
-
-        public override int GetHashCode()
-        {
-            return this.CustomerID + this.BornDate.Year+this.BornDate.Month+this.BornDate.Day + this.PhoneNumber;
-        }
     }
 }
