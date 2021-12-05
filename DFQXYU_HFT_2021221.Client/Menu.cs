@@ -270,7 +270,7 @@ namespace DFQXYU_HFT_2021221.Client
             else if (property == "RegularCustomer")
             {
                 Console.WriteLine($"RegularCustomer {cUpdate.RegularCustomer}\r");
-                Console.Write($"New Price: ");
+                Console.Write($"New RehularCustomer value: ");
                 bool pri = bool.Parse(Console.ReadLine());
                 cUpdate.RegularCustomer = pri;
             }
@@ -323,8 +323,8 @@ namespace DFQXYU_HFT_2021221.Client
             }
             else if (property == "Promotions")
             {
-                Console.WriteLine($"RegularCustomer {rUpdate.Promotions}\r");
-                Console.Write($"New Price: ");
+                Console.WriteLine($"Promotions {rUpdate.Promotions}\r");
+                Console.Write($"New Promotions value: ");
                 bool pri = bool.Parse(Console.ReadLine());
                 rUpdate.Promotions = pri;
             }
@@ -429,7 +429,7 @@ namespace DFQXYU_HFT_2021221.Client
             else if (property == "RegularCustomer")
             {
                 Console.WriteLine($"RegularCustomer {cCreate.RegularCustomer}\r");
-                Console.Write($"New Price: ");
+                Console.Write($"New RegularCustomer value: ");
                 bool pri = bool.Parse(Console.ReadLine());
                 cCreate.RegularCustomer = pri;
             }
@@ -482,15 +482,13 @@ namespace DFQXYU_HFT_2021221.Client
             }
             else if (property == "Promotions")
             {
-                Console.WriteLine($"RegularCustomer {rCreate.Promotions}\r");
-                Console.Write($"New Price: ");
+                Console.WriteLine($"Promotions {rCreate.Promotions}\r");
+                Console.Write($"New Promotions value: ");
                 bool pri = bool.Parse(Console.ReadLine());
                 rCreate.Promotions = pri;
             }
             else
-            {
-                //rCreate.Movie = rMovieCreate;
-                //rCreate.Customer = rCustomerCreate;
+            {               
                 restService.Post<MovieRental>(rCreate, "movierental");
             }
 
