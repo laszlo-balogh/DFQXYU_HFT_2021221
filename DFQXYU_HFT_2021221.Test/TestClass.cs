@@ -115,6 +115,15 @@ namespace DFQXYU_HFT_2021221.Test
             mockCustomerRepository.Setup(t => t.Delete(It.IsAny<int>()));
 
             mockMovieREntalRepository.Setup(t=>t.Delete(It.IsAny<int>()));
+            mockMovieREntalRepository.Setup(t=>t.Read(1)).Returns(new MovieRental()
+            {
+                RentalID = 1,
+                Promotions = false,
+                Movie = fakeMovie,
+                Customer = fakeCustomer,
+                MovieID = fakeMovie.MovieID,
+                CustomerID = fakeCustomer.CustomerID
+            });
 
             movieRentalLogic = new MovieRentalLogic(mockMovieREntalRepository.Object,
                 mockMovieRepository.Object, mockCustomerRepository.Object);
