@@ -30,7 +30,7 @@ namespace DFQXYU_HFT_2021221.Logic
             {
                 throw new ArgumentException("Born date cannot be empty");
             }
-            else if ( customer.PhoneNumber < 0 || customer.PhoneNumber == 0)
+            else if (customer.PhoneNumber < 0 || customer.PhoneNumber == 0)
             {
                 throw new ArgumentException("Wrong phone number format");
             }
@@ -53,11 +53,10 @@ namespace DFQXYU_HFT_2021221.Logic
             else if (!customer.Email.Contains('@'))
             {
                 throw new ArgumentException("Wrong email format");
-            }                  
-            else
-            {
-                this.customerRepo.Create(customer);
             }
+
+            this.customerRepo.Create(customer);
+
         }
 
         public void Delete(int id)
@@ -66,7 +65,7 @@ namespace DFQXYU_HFT_2021221.Logic
             {
                 throw new IndexOutOfRangeException("Minimum id value is 1");
             }
-            else if (customerRepo.Read(id)==null)
+            else if (customerRepo.Read(id) == null)
             {
                 throw new IndexOutOfRangeException("Customer not found");
             }

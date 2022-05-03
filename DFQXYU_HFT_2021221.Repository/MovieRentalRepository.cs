@@ -18,6 +18,41 @@ namespace DFQXYU_HFT_2021221.Repository
         }
         public void Create(MovieRental rental)
         {
+            var customer = from x in db.Customers
+                           where x.CustomerID == rental.CustomerID
+                           select new Customer()
+                           {
+                               Name = x.Name,
+                               BornDate = x.BornDate,
+                               CustomerID = x.CustomerID,
+                               Email = x.Email,
+                               PhoneNumber = x.PhoneNumber,
+                               RegularCustomer = x.RegularCustomer,
+                               Rentals = x.Rentals,
+                           };
+
+            var movie = from x in db.Movies
+                          where x.MovieID == rental.MovieID
+                          select new Movie()
+                          {
+                              MovieID = x.MovieID,
+                              Location = x.Location,
+                              MovieTitle = x.MovieTitle,
+                              Price = x.Price,
+                              Producer = x.Producer,
+                              Year = x.Year,
+                          };
+
+            if (rental.Customer == null)
+            {
+                rental.Customer = customer as Customer;
+            }
+
+            if (rental.Movie == null)
+            {
+                rental.Movie = movie as Movie;
+            }
+
             db.Add(rental);
             db.SaveChanges();
         }
@@ -40,12 +75,12 @@ namespace DFQXYU_HFT_2021221.Repository
 
         public void Update(MovieRental rental)
         {
-            var oldRental = Read(rental.RentalID);           
+            var oldRental = Read(rental.RentalID);
             oldRental.MovieID = rental.MovieID;
             oldRental.Promotions = rental.Promotions;
             oldRental.StartDate = rental.StartDate;
             oldRental.EndDate = rental.EndDate;
-            oldRental.CustomerID = rental.CustomerID;         
+            oldRental.CustomerID = rental.CustomerID;
             db.SaveChanges();
         }
     }

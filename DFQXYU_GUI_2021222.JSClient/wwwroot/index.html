@@ -1,0 +1,60 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Movie UI</title>
+    <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+    <h1>Movie Catalog</h1>
+
+    <div id="formdiv">
+        <label>Title</label>
+        <input type="text" id="movieTitle" />
+        <label>Producer</label>
+        <input type="text" id="movieProducer" />
+        <label>Location</label>
+        <input type="text" id="movieLocation" />
+        <label>Year</label>
+        <input type="number" id="movieYear" />
+        <label>Price</label>
+        <input type="number" id="moviePrice" />
+
+        <button type="button" onclick="create()">Add Movie</button>
+    </div>
+
+    <div id="updateformdiv">
+        <label>Title</label>
+        <input type="text" id="movieTitletoupdate" />
+        <label>Producer</label>
+        <input type="text" id="movieProducertoupdate" />
+        <label>Location</label>
+        <input type="text" id="movieLocationtoupdate" />
+        <label>Year</label>
+        <input type="number" id="movieYeartoupdate" />
+        <label>Price</label>
+        <input type="number" id="moviePricetoupdate" />
+
+        <button type="button" onclick="update()">Update Movie</button>
+    </div>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Title</th>
+                <th>Producer</th>
+                <th>Location</th>
+                <th>Year</th>
+                <th>Price</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody id="sajt"></tbody>
+    </table>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/6.0.1/signalr.js"></script>
+    <script src="script.js"></script>
+
+</body>
+</html>

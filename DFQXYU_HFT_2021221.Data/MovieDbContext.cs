@@ -16,6 +16,7 @@ namespace DFQXYU_HFT_2021221.Data
         public virtual DbSet<MovieRental> MovieRentals { get; set; }
         public MovieDbContext()
         {
+            
             this.Database.EnsureCreated();
         }
 

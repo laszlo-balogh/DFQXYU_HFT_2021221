@@ -1,6 +1,3 @@
-using DFQXYU_HFT_2021221.Data;
-using DFQXYU_HFT_2021221.Logic;
-using DFQXYU_HFT_2021221.Repository;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -11,7 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace DFQXYU_HFT_2021221.Endpoint
+namespace DFQXYU_GUI_2021222.JSClient
 {
     public class Startup
     {
@@ -19,14 +16,6 @@ namespace DFQXYU_HFT_2021221.Endpoint
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllers();
-            services.AddTransient<IMovieLogic, MovieLogic>();
-            services.AddTransient<ICustomerLogic, CustomerLogic>();
-            services.AddTransient<IMovieReantalLogic, MovieRentalLogic>();
-            services.AddTransient<IMovieRepository, MovieRepository>();
-            services.AddTransient<ICustomerRepository, CustomerRepository>();
-            services.AddTransient<IMovieRentalRepository, MovieRentalRepository>();
-            services.AddTransient<MovieDbContext, MovieDbContext>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -35,14 +24,18 @@ namespace DFQXYU_HFT_2021221.Endpoint
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-                
             }
 
             app.UseRouting();
 
+            app.UseStaticFiles();
+
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapControllers();
+                endpoints.MapGet("/", async context =>
+                {
+                    await context.Response.WriteAsync("Hello World!");
+                });
             });
         }
     }
