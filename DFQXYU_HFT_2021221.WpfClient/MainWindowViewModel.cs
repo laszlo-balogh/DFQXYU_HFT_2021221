@@ -47,7 +47,7 @@ namespace DFQXYU_HFT_2021221.WpfClient
                         Price = value.Price,
                     };
                     OnPropertyChanged();
-                    (DeleteCustomerCommand as RelayCommand).NotifyCanExecuteChanged();
+                    (DeleteMovieCommand as RelayCommand).NotifyCanExecuteChanged();
                 }
             }
         }
@@ -60,14 +60,14 @@ namespace DFQXYU_HFT_2021221.WpfClient
                 if (value != null)
                 {
                     selectedCustomer = new Customer()
-                    {
+                    {                        
                         CustomerID = value.CustomerID,
                         Name = value.Name,
                         BornDate = value.BornDate,
                         Email = value.Email,
                         PhoneNumber = value.PhoneNumber,
                         RegularCustomer = value.RegularCustomer,
-                        Rentals = value.Rentals,
+                        Rentals = value.Rentals,                        
                     };
                     OnPropertyChanged();
                     (DeleteCustomerCommand as RelayCommand).NotifyCanExecuteChanged();
